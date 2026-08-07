@@ -6,10 +6,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     RoomManager roomManager;
 
-    [SerializeField]
-    int wavesPerExpansion = 3;
+    public int wavePeriod;
 
-    public int CurrentWave { get; private set; }
+    int currrentWave;
 
     public Action<int> OnWaveStarted;
 
@@ -20,9 +19,9 @@ public class WaveManager : MonoBehaviour
 
     public void FinishWave()
     {
-        CurrentWave++;
+        currrentWave++;
 
-        if(CurrentWave % wavesPerExpansion == 0)
+        if(currrentWave % wavePeriod == 0)
         {
             roomManager.SpawnNextRoom();
         }
@@ -32,8 +31,8 @@ public class WaveManager : MonoBehaviour
 
     void StartNextWave()
     {
-        Debug.Log($"Wave {CurrentWave}");
+        Debug.Log($"Wave {currrentWave}");
 
-        OnWaveStarted?.Invoke(CurrentWave);
+        OnWaveStarted?.Invoke(currrentWave);
     }
 }
