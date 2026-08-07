@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1033909223869908591}
   - component: {fileID: 3781932172494663646}
-  - component: {fileID: 899997227162129364}
-  m_Layer: 11
-  m_Name: Line
+  m_Layer: 12
+  m_Name: LinePreview
   m_TagString: Line
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,53 +79,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &899997227162129364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861803222902976106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f75a830f5d9de4b8584d7c07fa8280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.LineDelete
-  rightClick:
-    m_Name: Right Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1cafcc7f-7a9f-41a5-b1d5-24e6227b6dac
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d647a2a7-35e2-41f5-b66b-7ae52b43be4e
-      m_Path: <Mouse>/rightButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Right Click
-      m_Flags: 0
-    m_Flags: 0
-  mousePosition:
-    m_Name: Mouse Position
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 563d757d-a665-42d1-bc0e-8fe42121ac74
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 489ff268-a896-4ed9-ab01-210d27897a4c
-      m_Path: <Mouse>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Mouse Position
-      m_Flags: 0
-    m_Flags: 0
-  collider: {fileID: 3781932172494663646}
 --- !u!1 &4450613006933839450
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +161,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2784314}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -5,6 +5,12 @@ namespace PulleyBun
     public class Ball : MonoBehaviour
     {
         [SerializeField] Vector2 velocity;
+        int layerMask;
+
+        void Awake()
+        {
+            layerMask = LayerMask.GetMask("Line");
+        }
 
         public void SetVelocity(Vector2 velocity)
         {
@@ -17,7 +23,7 @@ namespace PulleyBun
             var move = velocity * Time.deltaTime;
             var position = transform.position;
             var direction = transform.right;
-            var hit = Physics2D.Raycast(position, direction, move.magnitude);
+            var hit = Physics2D.Raycast(position, direction, move.magnitude, layerMask);
             if (hit)
             {
                 direction = Vector2.Reflect(direction, hit.normal);
