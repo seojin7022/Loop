@@ -4,6 +4,8 @@ namespace PulleyBun
 {
     public class Preview : MonoBehaviour
     {
+        public static readonly float RayMargin = 0.01f;
+
         [SerializeField] float predictDepth = 60f;
         [SerializeField] float predictLength = 100f;
         [SerializeField] LineRenderer lineRenderer;
@@ -21,8 +23,7 @@ namespace PulleyBun
                 {
                     lineRenderer.SetPosition(i, hit.point);
                     direction = Vector2.Reflect(direction, hit.normal);
-                    //Debug.Log($"direction: {direction}, hit.transform.up: {hit.transform.up}, hit.normal: {hit.normal}");
-                    position = hit.point + (Vector2)direction * 0.01f;
+                    position = hit.point + (Vector2)direction * RayMargin;
                 }
                 else
                 {

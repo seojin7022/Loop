@@ -4,16 +4,32 @@ namespace PulleyBun
 {
     public class Ball : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] Vector2 velocity;
+
+        public void SetVelocity(Vector2 velocity)
         {
-            
+            this.velocity = velocity;
+            transform.right = velocity.normalized;
         }
 
-        // Update is called once per frame
         void Update()
         {
-            
+            var move = velocity * Time.deltaTime;
+            var position = transform.position;
+            var direction = transform.right;
+            var hit = Physics2D.Raycast(position, direction, move.magnitude);
+            if (hit)
+            {
+                direction = Vector2.Reflect(direction, hit.normal);
+                position = hit.point + (Vector2)direction * (Preview.RayMargin + move.magnitude - hit.distance);
+                velocity = direction * velocity.magnitude;
+            }
+            else
+            {
+                position += (Vector3)move;
+            }
+            transform.position = position;
+            transform.right = direction;
         }
     }
 }
