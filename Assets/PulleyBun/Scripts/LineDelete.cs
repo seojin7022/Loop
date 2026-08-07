@@ -32,5 +32,10 @@ namespace PulleyBun
                 OnRightClick();
             }
         }
+
+        void OnDestroy()
+        {
+            LineMaker.Instance.OnRemoveLine();
+        }
     }
 }
