@@ -8,16 +8,21 @@ namespace PulleyBun
         int layerMask;
         Squish squish;
 
+        bool firstBounce = true;
+        [SerializeField] float duplicateAngle = 10f;
+        [SerializeField] GameObject splashPrefab;
+
         void Awake()
         {
             layerMask = LayerMask.GetMask("Line");
             squish = GetComponent<Squish>();
         }
 
-        public void SetVelocity(Vector2 velocity)
+        public void SetVelocity(Vector2 velocity, bool firstBounce = true)
         {
             this.velocity = velocity;
             transform.right = velocity.normalized;
+            this.firstBounce = firstBounce;
         }
 
         void Update()
@@ -30,7 +35,26 @@ namespace PulleyBun
             {
                 direction = Vector2.Reflect(direction, hit.normal);
                 position = hit.point + (Vector2)direction * (Preview.RayMargin + move.magnitude - hit.distance);
+                if (firstBounce)
+                {
+                    firstBounce = false;
+                    if (RelicManager.Instance.HasRelic(Relic.Duplicate))
+                    {
+                        var rotation = Quaternion.Euler(0, 0, duplicateAngle);
+                        var newDirection1 = rotation * direction;
+                        rotation = Quaternion.Euler(0, 0, -duplicateAngle);
+                        var newDirection2 = rotation * direction;
+
+                        direction = newDirection1;
+                        var newBall = Instantiate(gameObject, position, Quaternion.identity);
+                        newBall.GetComponent<Ball>().SetVelocity(newDirection2 * velocity.magnitude, false);
+                    }
+                }
                 velocity = direction * velocity.magnitude;
+                if (RelicManager.Instance.HasRelic(Relic.MirrorSplash))
+                {
+                    Instantiate(splashPrefab, hit.point, Quaternion.identity);
+                }
             }
             else
             {
