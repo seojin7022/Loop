@@ -6,10 +6,12 @@ namespace PulleyBun
     {
         [SerializeField] Vector2 velocity;
         int layerMask;
+        Squish squish;
 
         void Awake()
         {
             layerMask = LayerMask.GetMask("Line");
+            squish = GetComponent<Squish>();
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -36,6 +38,10 @@ namespace PulleyBun
             }
             transform.position = position;
             transform.right = direction;
+            if (hit && squish != null)
+            {
+                squish.DoSquash(transform.InverseTransformDirection(hit.normal));
+            }
         }
     }
 }

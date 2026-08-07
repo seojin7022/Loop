@@ -3,17 +3,19 @@ using DG.Tweening;
 
 public class Squish : MonoBehaviour
 {
-    Tweener tween;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-        tween = transform.DOPunchScale(new Vector3(0.3f, -0.3f, 0), 0.3f, 5, 0.5f);
-    }
+    public float squashAmount = 0.3f;
+    public float duration = 0.3f;
 
-    // Update is called once per frame
-    void Update()
+    /// <param name="normal">로컬 공간 기준 충돌 법선</param>
+    public void DoSquash(Vector2 normal)
     {
-        
+        Vector3 squashVector = new Vector3(
+            Mathf.Abs(normal.x) * -squashAmount + Mathf.Abs(normal.y) * squashAmount,
+            Mathf.Abs(normal.y) * -squashAmount + Mathf.Abs(normal.x) * squashAmount,
+            0
+        );
+
+        transform.DOKill(true);
+        transform.DOPunchScale(squashVector, duration, 5, 0.5f);
     }
 }
