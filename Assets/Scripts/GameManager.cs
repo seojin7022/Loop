@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     void OnWaveStarted(int wave)
     {
-        spawner.SpawnWave();
+        spawner.SpawnWave(wave, waveManager.wavePeriod);
     }
 
     public void WaveCleared()

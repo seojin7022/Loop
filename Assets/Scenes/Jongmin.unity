@@ -369,7 +369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1209795646}
+      - m_Target: {fileID: 1672429281}
         m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
         m_MethodName: FinishWave
         m_Mode: 1
@@ -584,7 +584,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -697,7 +697,7 @@ Transform:
   m_GameObject: {fileID: 444170812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: -7, z: 0}
+  m_LocalPosition: {x: -6, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -854,62 +854,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1209795651}
   - component: {fileID: 1209795649}
-  - component: {fileID: 1209795646}
-  - component: {fileID: 1209795647}
-  - component: {fileID: 1209795650}
-  - component: {fileID: 1209795648}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: '@GameManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1209795646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209795645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61da72fe237031b48b4f002bf3693f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  roomManager: {fileID: 1209795647}
-  wavesPerExpansion: 2
---- !u!114 &1209795647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209795645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7b05d4a87e1614aa56496e4e247363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  generator: {fileID: 1209795648}
---- !u!114 &1209795648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209795645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56f61108452cbb54c83cbd3bedeac369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RoomGenerator
-  floorTilemap: {fileID: 2054976156}
-  wallTilemap: {fileID: 55141140}
-  floorTile: {fileID: 11400000, guid: b7a6fafd3738bfe498b26d99fe9cbcd7, type: 2}
-  wallTile: {fileID: 11400000, guid: 180022696ce2da54c9903d9b8e54e8a1, type: 2}
-  roomWidth: 9
-  roomHeight: 7
 --- !u!114 &1209795649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,23 +873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2454a8db0de8f4d8e1a0979727f7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  waveManager: {fileID: 1209795646}
-  spawner: {fileID: 1209795650}
---- !u!114 &1209795650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209795645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbc03777f3d2024fa85e25209d5be87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  roomManager: {fileID: 1209795647}
-  enemyPrefab: {fileID: 6700390969251482434, guid: ec756fa2503907f45af4fbad3365a295, type: 3}
-  generator: {fileID: 1209795648}
+  waveManager: {fileID: 1672429281}
+  spawner: {fileID: 1672429280}
 --- !u!4 &1209795651
 Transform:
   m_ObjectHideFlags: 0
@@ -1028,6 +964,161 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1489798651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489798654}
+  - component: {fileID: 1489798653}
+  m_Layer: 0
+  m_Name: '@RoomManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1489798653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489798651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7b05d4a87e1614aa56496e4e247363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  generator: {fileID: 0}
+  floorTilemap: {fileID: 2054976156}
+  wallTilemap: {fileID: 55141140}
+  floorTile: {fileID: 11400000, guid: b7a6fafd3738bfe498b26d99fe9cbcd7, type: 2}
+  wallTile: {fileID: 11400000, guid: 180022696ce2da54c9903d9b8e54e8a1, type: 2}
+  roomWidth: 12
+  roomHeight: 10
+  roomTypeDatas:
+  - roomType: 0
+    spawnPoints:
+    - spawnPosition: {x: -2, y: 7}
+      targetPosition: {x: -2, y: 0}
+    - spawnPosition: {x: 2, y: 7}
+      targetPosition: {x: 2, y: 0}
+  - roomType: 1
+    spawnPoints:
+    - spawnPosition: {x: -12, y: 5}
+      targetPosition: {x: -6, y: 0}
+    - spawnPosition: {x: -12, y: 7}
+      targetPosition: {x: -4, y: 0}
+  - roomType: 2
+    spawnPoints:
+    - spawnPosition: {x: -12, y: 5}
+      targetPosition: {x: -6, y: 0}
+    - spawnPosition: {x: -12, y: 7}
+      targetPosition: {x: -4, y: 0}
+  - roomType: 4
+    spawnPoints:
+    - spawnPosition: {x: -12, y: 5}
+      targetPosition: {x: -6, y: 0}
+    - spawnPosition: {x: -12, y: 7}
+      targetPosition: {x: -4, y: 0}
+  - roomType: 5
+    spawnPoints:
+    - spawnPosition: {x: -12, y: 5}
+      targetPosition: {x: -6, y: 0}
+    - spawnPosition: {x: -12, y: 7}
+      targetPosition: {x: -4, y: 0}
+  - roomType: 6
+    spawnPoints:
+    - spawnPosition: {x: -12, y: 5}
+      targetPosition: {x: -6, y: 0}
+    - spawnPosition: {x: -12, y: 7}
+      targetPosition: {x: -4, y: 0}
+--- !u!4 &1489798654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489798651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.025, y: 1.86199, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1672429279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672429282}
+  - component: {fileID: 1672429281}
+  - component: {fileID: 1672429280}
+  m_Layer: 0
+  m_Name: '@WaveManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1672429280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672429279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbc03777f3d2024fa85e25209d5be87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  roomManager: {fileID: 1489798653}
+  enemyPrefab: {fileID: 6700390969251482434, guid: ec756fa2503907f45af4fbad3365a295, type: 3}
+  initialEnemyNum: 1
+  numChangePerWave: 0
+  initialEnemySpeed: 3
+  speedChangePerWave: 0.05
+  initialSpawnInterval: 2
+  intervalChangePerWave: -0.1
+--- !u!114 &1672429281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672429279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61da72fe237031b48b4f002bf3693f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  roomManager: {fileID: 1489798653}
+  wavePeriod: 3
+--- !u!4 &1672429282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672429279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.025, y: 1.86199, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1207,5 +1298,7 @@ SceneRoots:
   - {fileID: 355249467}
   - {fileID: 444170814}
   - {fileID: 1209795651}
+  - {fileID: 1672429282}
+  - {fileID: 1489798654}
   - {fileID: 143472133}
   - {fileID: 1280784629}
