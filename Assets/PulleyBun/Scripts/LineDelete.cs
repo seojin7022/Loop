@@ -15,11 +15,6 @@ namespace PulleyBun
             mousePosition.Enable();
         }
 
-        void Start()
-        {
-            collider = GetComponent<Collider2D>();
-        }
-
         void OnRightClick()
         {
             var position = Camera.main.ScreenToWorldPoint(mousePosition.ReadValue<Vector2>());
