@@ -9,6 +9,12 @@ namespace PulleyBun
         [SerializeField] float predictDepth = 60f;
         [SerializeField] float predictLength = 100f;
         [SerializeField] LineRenderer lineRenderer;
+        int layerMask;
+
+        void Awake()
+        {
+            layerMask = LayerMask.GetMask("Line") | LayerMask.GetMask("LinePreview");
+        }
 
         void Update()
         {
@@ -18,7 +24,7 @@ namespace PulleyBun
             for (int i = 1; i < predictDepth; i++)
             {
                 lineRenderer.positionCount = i + 1;
-                var hit = Physics2D.Raycast(position, direction, predictLength);
+                var hit = Physics2D.Raycast(position, direction, predictLength, layerMask);
                 if (hit)
                 {
                     lineRenderer.SetPosition(i, hit.point);
