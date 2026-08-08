@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8768526423175641075}
   - component: {fileID: 8965907568366096176}
   - component: {fileID: 7834353800441804814}
+  - component: {fileID: 1428451632704335743}
   m_Layer: 0
   m_Name: '@WaveManager'
   m_TagString: Untagged
@@ -48,7 +49,9 @@ MonoBehaviour:
   roomManager: {fileID: 0}
   spawner: {fileID: 7834353800441804814}
   hp: 10
-  wavePeriod: 3
+  wavePeriod: 1
+  relicSelectionEnabled: 1
+  wavePreviewEnabled: 1
 --- !u!114 &7834353800441804814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,3 +75,70 @@ MonoBehaviour:
   speedChangePerWave: 0.05
   initialSpawnInterval: 0.5
   intervalChangePerWave: -0.01
+  minimumEnemyGap: 0.75
+  useStageTable: 1
+  stageTable:
+    stages:
+    - stage: 1
+      killTarget: 4
+      enemyHp: 1
+      enemySpeed: 1
+      spawnInterval: 0.9
+      note: "\uC0C1\xB7\uD558\uB2E8 \uAE30\uBCF8 \uB77C\uC778, \uD29C\uD1A0\uB9AC\uC5BC"
+    - stage: 2
+      killTarget: 5
+      enemyHp: 1
+      enemySpeed: 1.05
+      spawnInterval: 0.85
+      note: "\uC0C1\xB7\uD558\uB2E8 \uAD50\uB300 \uCD9C\uD604"
+    - stage: 3
+      killTarget: 6
+      enemyHp: 1
+      enemySpeed: 1.1
+      spawnInterval: 0.8
+      note: "\uC2E0\uADDC \uC0C1\uB2E8 \uC9C4\uC785\uB85C \uC18C\uAC1C"
+    - stage: 4
+      killTarget: 9
+      enemyHp: 1
+      enemySpeed: 1.15
+      spawnInterval: 0.7
+      note: "\uB9F5 \uC0C1\uB2E8 \uCD95\uC18C, 3\uAC1C \uB77C\uC778 \uD65C\uC6A9"
+    - stage: 5
+      killTarget: 12
+      enemyHp: 1
+      enemySpeed: 1.2
+      spawnInterval: 0.5
+      note: "\uCD9C\uD604 \uAC04\uACA9 \uB2E8\uCD95"
+    - stage: 6
+      killTarget: 15
+      enemyHp: 1
+      enemySpeed: 1.25
+      spawnInterval: 0.4
+      note: "\uCD5C\uC885 \uBC00\uB3C4, 3\uAC1C \uB77C\uC778 \uC555\uBC15"
+    killTargetGrowth: 3
+    speedGrowth: 0.05
+    intervalGrowth: -0.02
+    minSpawnInterval: 0.15
+--- !u!114 &1428451632704335743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9155888776372681576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c571dd33672444e97975a641106e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WavePreview
+  pathWidth: 0.08
+  pathColor: {r: 1, g: 0.35, b: 0.4, a: 0.9}
+  spawnMarkerColor: {r: 1, g: 0.45, b: 0.45, a: 0.95}
+  targetMarkerColor: {r: 1, g: 0.85, b: 0.35, a: 0.9}
+  spawnMarkerSize: 0.42
+  targetMarkerSize: 0.3
+  leadInSeconds: 10
+  pauseDuringPreview: 0
+  allowSkip: 1
+  keepDuringWave: 1
+  dimmedAlpha: 0.22
