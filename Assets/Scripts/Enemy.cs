@@ -23,8 +23,10 @@ public class Enemy : MonoBehaviour
     [Tooltip("처치 시 터지는 링의 최종 반지름")]
     [SerializeField] float deathRingRadius = 0.9f;
 
+    [SerializeField] Transform hpBar;
+
     Vector3 spawn, target;
-    float speed, hp;
+    float speed, hp, maxHp;
     bool isDestroyed;
 
     /// 오라 중첩 방지용. 여러 거울의 오라가 있어도 이 간격보다 자주 피해를 받지 않는다.
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
         target = targetPos;
         this.speed = speed;
         this.hp = hp;
+        this.maxHp = hp;
 
         MoveToTarget().Forget();
     }
@@ -75,6 +78,7 @@ public class Enemy : MonoBehaviour
         if (hp > 0)
         {
             PlayHitFeedback(hitPoint);
+            hpBar.localScale = new Vector3(hp / maxHp, 1, 1);
             return;
         }
 
