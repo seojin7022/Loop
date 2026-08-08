@@ -164,7 +164,7 @@ public class WavePreview : MonoBehaviour
 
         prompt = RuntimeUI.CreateText(
             "Prompt", canvas.transform, "",
-            44f, Color.white, TextAlignmentOptions.Center);
+            44f, Color.black, TextAlignmentOptions.Center);
 
         UpdatePrompt(wave, enemyCount, leadInSeconds);
 
@@ -180,9 +180,7 @@ public class WavePreview : MonoBehaviour
     {
         if (prompt == null) return;
 
-        string hint = allowSkip
-            ? $"<size=70%><color=#B9C6D8>{Mathf.Max(0f, remaining):0.0}초 뒤 시작  ·  Space 로 즉시 시작</color></size>"
-            : $"<size=70%><color=#B9C6D8>{Mathf.Max(0f, remaining):0.0}초 뒤 시작</color></size>";
+        string hint = "<size=70%><color=#2a4366>Space 를 눌러 시작</color></size>";
 
         prompt.text = $"웨이브 {wave + 1}  ·  적 {enemyCount}마리\n{hint}";
     }
@@ -224,5 +222,12 @@ public class WavePreview : MonoBehaviour
 
         markers.Clear();
         HidePrompt();
+    }
+
+    void Update()
+    {
+        if (prompt == null) return;
+        if (Tutorial.Shown()) prompt.alpha = 0f;
+        else prompt.alpha = 1f;
     }
 }

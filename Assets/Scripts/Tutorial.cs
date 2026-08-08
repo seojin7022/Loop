@@ -71,4 +71,9 @@ public class Tutorial : MonoBehaviour
     {
         if (panel) panel.SetActive(on);
     }
+
+    public static bool Shown()
+    {
+        return instance != null && instance.panel != null && instance.panel.activeSelf;
+    }
 }
