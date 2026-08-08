@@ -128,6 +128,8 @@ namespace PulleyBun
             OnAddLine(line);
 
             PlayPlaceEffect(start, start + vector);
+
+            Tutorial.Trigger("PlaceMirror");
         }
 
         /// 거울이 설치됐다는 것을 알리는 충격파 링 + 선분 펄스 + 잔불꽃.

@@ -86,7 +86,7 @@ public class WavePreview : MonoBehaviour
                 if (remaining <= 0f) return true;
                 if (startRequested) return true;
 
-                if (allowSkip)
+                if (allowSkip && !Tutorial.Shown())
                 {
                     Keyboard keyboard = Keyboard.current;
                     if (keyboard != null &&
@@ -175,7 +175,7 @@ public class WavePreview : MonoBehaviour
 
         string hint = "<size=70%><color=#2a4366>Space 를 눌러 시작</color></size>";
 
-        prompt.text = $"웨이브 {wave + 1}  ·  적 {enemyCount}마리\n{hint}";
+        prompt.text = $"웨이브 {wave + 1} · 적 {enemyCount}마리\n{hint}";
     }
 
     void HidePrompt()

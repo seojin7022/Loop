@@ -38,8 +38,8 @@ public class Tutorial : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(steps[index].completeOn)) return;
 
-        if ((Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) ||
-            (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
+        if ((Keyboard.current != null && Keyboard.current.anyKey.wasReleasedThisFrame) ||
+             Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
             Next();
     }
 
