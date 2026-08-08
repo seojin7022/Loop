@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57806fc43329f63429844d6df939509b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.RelicManager
-  relics: 02000000
+  relics: 
