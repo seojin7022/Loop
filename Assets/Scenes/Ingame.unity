@@ -1661,20 +1661,28 @@ PrefabInstance:
         \uBC00\uC5B4\uBD99\uC774\uAE30"
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: stageTable.stages.Array.data[0].enemyHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: stageTable.stages.Array.data[1].enemyHp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[2].enemyHp
-      value: 1.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[3].enemyHp
-      value: 1.35
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[4].enemyHp
-      value: 1.6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[5].enemyHp
-      value: 1.85
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[0].enemySpeed
@@ -1789,9 +1797,17 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: wavePeriod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: roomManager
       value: 
       objectReference: {fileID: 554668936}
+    - target: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: wavePreviewEnabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9155888776372681576, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: m_Name
       value: '@WaveManager'

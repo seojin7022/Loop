@@ -112,12 +112,13 @@ public class WaveManager : MonoBehaviour
 
         List<SpawnLane> lanes = spawner.BuildLanes(currrentWave, SafePeriod);
         if (this == null || isGameOver) return;
-
+
+
         int expected = spawner.GetWaveEnemyCount(currrentWave, SafePeriod, lanes.Count);
 
         if (wavePreviewEnabled && lanes.Count > 0)
         {
-            WavePreview preview = WavePreview.Ensure();
+            var preview = WavePreview.Instance;
             if (preview != null) await preview.ShowAndWaitAsync(currrentWave, expected, lanes);
         }
 
