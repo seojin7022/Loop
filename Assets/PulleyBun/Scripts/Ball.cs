@@ -8,7 +8,6 @@ namespace PulleyBun
         int layerMask;
         Squish squish;
         Rigidbody2D rb;
-        Vector3 movement;
 
         bool firstBounce = true;
         [SerializeField] float duplicateAngle = 10f;
@@ -61,9 +60,9 @@ namespace PulleyBun
             }
             else
             {
-                movement = (Vector3)move;
+                position += (Vector3)move;
             }
-            rb.MovePosition(transform.position + movement);
+            rb.MovePosition(position);
             transform.right = direction;
             if (hit && squish != null)
             {
