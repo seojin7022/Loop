@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57806fc43329f63429844d6df939509b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.RelicManager
-  relics: 02000000
+  relics: 04000000
 --- !u!4 &362132867
 Transform:
   m_ObjectHideFlags: 0
@@ -1403,9 +1403,9 @@ MonoBehaviour:
   enemyPrefab: {fileID: 6700390969251482434, guid: ec756fa2503907f45af4fbad3365a295, type: 3}
   initialEnemyNum: 2
   numChangePerWave: 0
-  initialEnemyHP: 0
+  initialEnemyHP: 2
   hpChangePerWave: 0
-  initialEnemySpeed: 1
+  initialEnemySpeed: 2
   speedChangePerWave: 0.05
   initialSpawnInterval: 0.5
   intervalChangePerWave: -0.01

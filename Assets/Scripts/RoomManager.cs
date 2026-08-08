@@ -22,9 +22,7 @@ public class RoomManager : MonoBehaviour
     {
         Vector2Int pos;
 
-        int currentWave = 3 * currentRow + currentStage;
-
-        switch (currentWave)
+        switch (currentStage)
         {
             case 0:
                 pos = new Vector2Int(0, currentRow);
@@ -39,7 +37,7 @@ public class RoomManager : MonoBehaviour
                 break;
         }
 
-        CreateRoom(pos, currentWave);
+        CreateRoom(pos, 3 * currentRow + currentStage);
 
         currentStage++;
 
@@ -168,7 +166,7 @@ public class RoomManager : MonoBehaviour
 
         if(!hasUp)
         {
-            for(int x=0;x<roomWidth;x++)
+            for(int x = 0; x < roomWidth; x++)
             {
                 wallTilemap.SetTile(
                     origin + new Vector3Int(x,roomHeight-1,0),
@@ -200,7 +198,7 @@ public class RoomManager : MonoBehaviour
 
         if(!hasLeft)
         {
-            for(int y=0;y<roomHeight;y++)
+            for(int y = 0; y < roomHeight; y++)
             {
                 wallTilemap.SetTile(
                     origin + new Vector3Int(0,y,0),
@@ -210,7 +208,7 @@ public class RoomManager : MonoBehaviour
 
         if(!hasRight)
         {
-            for(int y=0;y<roomHeight;y++)
+            for(int y = 0; y < roomHeight; y++)
             {
                 wallTilemap.SetTile(
                     origin + new Vector3Int(roomWidth-1,y,0),

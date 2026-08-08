@@ -31,7 +31,7 @@ public class WaveManager : MonoBehaviour
     public void EnemyDie()
     {
         nowEnemyNum -= 1;
-        Debug.Log(nowEnemyNum);
+        
         if(nowEnemyNum == 0)
             FinishWave();
     }
@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
     public void PlayerDamage()
     {
         nowEnemyNum -= 1;
-        Debug.Log(nowEnemyNum);
+        
         hp -= 1;
         if(hp == 0)
             EventBus.Publish("PlayerDie");
