@@ -17,6 +17,7 @@ namespace PulleyBun
 
         [Header("설치 이펙트")]
         [SerializeField] Color placeColor = new(0.6f, 0.92f, 1f, 1f);
+        [SerializeField] Color unavailablePlaceColor = new(0.6f, 0.2f, 0.2f, 1f);
 
         [Tooltip("거울 중심에서 퍼져 나가는 충격파 링의 최종 반지름")]
         [SerializeField] float placeRingRadius = 1.5f;
@@ -80,10 +81,14 @@ namespace PulleyBun
             LineRemoved?.Invoke(line);
         }
 
+        public bool CanPlaceLine()
+        {
+            return LineCount < MaxLines;
+        }
+
         void OnClick(Vector2 position)
         {
             if (isDragging) return;
-            if (LineCount >= MaxLines) return;
             isDragging = true;
 
             start = position;
@@ -111,6 +116,11 @@ namespace PulleyBun
             {
                 vector = vector.normalized * GetMaxLength();
             }
+            if (!CanPlaceLine())
+            {
+                PlayUnavailablePlaceEffect(start, start + vector);
+                return;
+            }
             var line = Instantiate(linePrefab, start, Quaternion.identity);
             line.transform.position = start + vector * 0.5f;
             line.transform.right = vector.normalized;
@@ -135,6 +145,14 @@ namespace PulleyBun
                 speed: 4f, size: 0.12f, lifetime: 0.28f);
 
             Sfx.MirrorPlaced(center);
+        }
+
+        void PlayUnavailablePlaceEffect(Vector2 a, Vector2 b)
+        {
+            Vector3 center = (a + b) * 0.5f;
+
+            Fx.Segment(a, b, unavailablePlaceColor,
+                width: placePulseWidth, duration: 0.22f);
         }
 
         void OnDrag(Vector2 position)
