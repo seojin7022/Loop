@@ -43,7 +43,7 @@ namespace PulleyBun
                 Relic = Relic.Duplicate,
                 DisplayName = "번식",
                 CategoryLabel = "탄환 변형 / 중복 불가",
-                Description = "총알이 거울에 처음 반사될 때 두 갈래로 분열한다.\n분열된 탄환도 정상적으로 반사·피격 판정을 가진다.",
+                Description = "처음 반사된 공이 두 갈래로 분열한다.",
                 Category = RelicCategory.BulletMod,
                 IconPath = "Relics/Duplicate",
                 Unique = true,
@@ -54,7 +54,7 @@ namespace PulleyBun
                 Relic = Relic.DamageEnhance,
                 DisplayName = "데미지 증가",
                 CategoryLabel = "탄환 변형 / 중복 불가",
-                Description = "첫 반사 이후 탄환 피해가 1 증가한다.\n이후 반사 횟수와 무관하게 증가한 피해를 유지한다.",
+                Description = "처음 반사된 공이 +1 데미지를 가진다.",
                 Category = RelicCategory.BulletMod,
                 IconPath = "Relics/DamageEnhance",
                 Unique = true,
@@ -63,9 +63,9 @@ namespace PulleyBun
             new RelicInfo
             {
                 Relic = Relic.MoreMirror,
-                DisplayName = "거울 개수 ×2",
+                DisplayName = "추가 거울",
                 CategoryLabel = "설치 자원 / 중복 불가",
-                Description = "설치 가능한 거울 수가 5개에서 10개로 증가한다.",
+                Description = "거울의 개수가 2배 증가한다.",
                 Category = RelicCategory.PlacementResource,
                 IconPath = "Relics/MoreMirror",
                 Unique = true,
@@ -74,9 +74,9 @@ namespace PulleyBun
             new RelicInfo
             {
                 Relic = Relic.BigMirror,
-                DisplayName = "거울 최대 크기 ×2",
+                DisplayName = "거대 거울",
                 CategoryLabel = "설치 자원 / 중복 불가",
-                Description = "거울 최대 길이가 2배로 증가한다.\n멀리 있는 레인을 한 번에 덮을 수 있다.",
+                Description = "거울 최대 길이가 2배로 증가한다.",
                 Category = RelicCategory.PlacementResource,
                 IconPath = "Relics/BigMirror",
                 Unique = true,
@@ -87,7 +87,7 @@ namespace PulleyBun
                 Relic = Relic.MirrorSplash,
                 DisplayName = "거울 오라",
                 CategoryLabel = "거울 부착 효과 / 중복 불가",
-                Description = "설치된 각 거울 주변 일정 범위의 적에게 초당 1 피해를 준다.\n여러 거울의 오라는 중첩되지 않는다.",
+                Description = "거울 주변 적에게 초당 1 피해를 준다.",
                 Category = RelicCategory.MirrorAttachment,
                 IconPath = "Relics/MirrorSplash",
                 Unique = true,
@@ -96,9 +96,9 @@ namespace PulleyBun
             new RelicInfo
             {
                 Relic = Relic.MirrorTurret,
-                DisplayName = "거울 하수인 소환",
+                DisplayName = "터렛",
                 CategoryLabel = "거울 부착 효과 / 중복 불가",
-                Description = "설치된 각 거울에 하수인 1기를 배치한다.\n하수인은 가까운 적에게 투사체를 발사한다. (최대 5기)",
+                Description = "터렛이 거울 주변의 적에게 투사체를 발사한다.",
                 Category = RelicCategory.MirrorAttachment,
                 IconPath = "Relics/MirrorTurret",
                 Unique = true,
