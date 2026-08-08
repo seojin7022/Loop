@@ -607,7 +607,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 6, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1227,7 +1227,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 406032422673848163, guid: 88041e2c04049a34db21b2fbb4f06891, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.72
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 406032422673848163, guid: 88041e2c04049a34db21b2fbb4f06891, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1449,20 +1449,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1428451632704335743, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
-      propertyPath: heartSprite
-      value: 
-      objectReference: {fileID: -205270267638800340, guid: 0618458b94465784b81dcf7f8c1eeef7, type: 3}
-    - target: {fileID: 1428451632704335743, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: leadInSeconds
       value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 1428451632704335743, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: targetMarkerColor.b
-      value: 0.4
+      value: 0.3625314
       objectReference: {fileID: 0}
     - target: {fileID: 1428451632704335743, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: targetMarkerColor.g
-      value: 0.34901962
+      value: 0.34901965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428451632704335743, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: targetMarkerColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: gameManager

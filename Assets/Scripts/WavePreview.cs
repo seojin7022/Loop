@@ -38,6 +38,7 @@ public class WavePreview : MonoBehaviour
     [SerializeField] float dimmedAlpha = 0.22f;
 
     [SerializeField] Sprite heartSprite;
+    [SerializeField] Sprite arrowSprite;
 
     readonly List<GameObject> markers = new();
     public Canvas canvas_pref;
@@ -142,7 +143,18 @@ public class WavePreview : MonoBehaviour
         }
 
         markers.Add(pathObject);
-        markers.Add(CreateMarker("WavePreviewSpawn", spawn, spawnMarkerSize, spawnMarkerColor, 2));
+        float angle = 0f;
+        if (needsCorner)
+        {
+            angle = Mathf.Atan2(corner.y - spawn.y, corner.x - spawn.x) * Mathf.Rad2Deg;
+        }
+        else
+        {
+            angle = Mathf.Atan2(target.y - spawn.y, target.x - spawn.x) * Mathf.Rad2Deg;
+        }
+        var spawnMarker = CreateMarker("WavePreviewSpawn", spawn, spawnMarkerSize, spawnMarkerColor, 2);
+        spawnMarker.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        markers.Add(spawnMarker);
         markers.Add(CreateMarker("WavePreviewTarget", target, targetMarkerSize, targetMarkerColor, 2, true));
     }
 
@@ -154,7 +166,7 @@ public class WavePreview : MonoBehaviour
         go.transform.localScale = Vector3.one * size;
 
         var renderer = go.AddComponent<SpriteRenderer>();
-        renderer.sprite = heart ? heartSprite : RuntimeGfx.Circle;
+        renderer.sprite = heart ? heartSprite : arrowSprite;
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
 
