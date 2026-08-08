@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b5d34f19f89df4c88266292b7ed39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.LineMaker
-  linePrefab: {fileID: 861803222902976106, guid: a8a151bf213b81a4780820dd312e1123, type: 3}
-  linePreviewPrefab: {fileID: 861803222902976106, guid: d061ccaaaa8a4fd41b340520001c4b19, type: 3}
+  linePrefab: {fileID: 6392147786962606876, guid: ebe0caab1e4984d1f81cc904b3e6550c, type: 3}
+  linePreviewPrefab: {fileID: 6392147786962606876, guid: 1f028adaf037545448efbdcc9c1aec43, type: 3}
   minLength: 0.5
   maxLength: 5
   drag:
@@ -82,3 +82,4 @@ MonoBehaviour:
       m_Action: Mouse Position
       m_Flags: 0
     m_Flags: 0
+  maxLines: 5
