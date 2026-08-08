@@ -55,6 +55,7 @@ public class RelicSelectUI : MonoBehaviour
     /// 선택이 끝날 때까지 대기한다. 제시할 특성이 없으면 즉시 반환한다.
     public async UniTask ShowAndWaitAsync()
     {
+        if (!RelicManager.IsEnabled) return;
         RelicManager manager = RelicManager.Instance;
         if (manager == null) return;
 

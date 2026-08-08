@@ -12,7 +12,8 @@ public class RoomManager : MonoBehaviour
     // 2 = 오른쪽
     int currentStage = 0;
 
-    /// 현재 남아 있는 방 중 가장 아래 줄. 방이 삭제되면 함께 올라간다.
+    // 스테이지마다 다시 그리는 내부 반사벽 패턴 번호.
+    int arenaStage = 1;
     public int BottomRow
     {
         get
@@ -64,6 +65,13 @@ public class RoomManager : MonoBehaviour
             DeleteRow(BottomRow);
 
         return true;
+    }
+
+    /// <summary>스테이지 전환 시 내부 반사벽 패턴을 갱신한다.</summary>
+    public void ApplyArenaLayout(int stage)
+    {
+        arenaStage = Mathf.Max(1, stage);
+        DrawAllRooms();
     }
 
     [Header("Tilemaps")]
@@ -174,9 +182,10 @@ public class RoomManager : MonoBehaviour
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
 
-        foreach(Room room in rooms.Values)
+        foreach (Room room in rooms.Values)
             DrawRoom(room);
 
+        DrawStageBumpers();
         EventBus.Publish("RoomsChanged");
     }
 
@@ -206,6 +215,49 @@ public class RoomManager : MonoBehaviour
             floorTilemap.CellToWorld(new Vector3Int((max.x + 1) * roomWidth, (max.y + 1) * roomHeight, 0)));
 
         return bounds;
+    }
+
+    // 외곽 벽과 같은 타일맵/레이어를 쓰므로 공이 이 벽에서도 그대로 반사된다.
+    void DrawStageBumpers()
+    {
+        if (arenaStage <= 1 || rooms.Count == 0) return;
+
+        Vector3Int center = floorTilemap.WorldToCell(RoomsBounds().center);
+        int variant = (arenaStage - 1) % 4;
+
+        switch (variant)
+        {
+            // 양쪽 기둥: 좌우 반사를 노리는 레이아웃
+            case 1:
+                AddBumper(center + new Vector3Int(-3, 0, 0), Vector2Int.up, 3);
+                AddBumper(center + new Vector3Int(3, 0, 0), Vector2Int.up, 3);
+                break;
+
+            // 위아래 레일: 각도 조절 후 수직 반사를 노리는 레이아웃
+            case 2:
+                AddBumper(center + new Vector3Int(-2, 2, 0), Vector2Int.right, 5);
+                AddBumper(center + new Vector3Int(-2, -2, 0), Vector2Int.right, 5);
+                break;
+
+            // 엇갈린 기둥: 연속 반사 경로를 만드는 레이아웃
+            case 3:
+                AddBumper(center + new Vector3Int(-4, 2, 0), Vector2Int.up, 4);
+                AddBumper(center + new Vector3Int(4, -4, 0), Vector2Int.up, 4);
+                break;
+        }
+    }
+
+    void AddBumper(Vector3Int start, Vector2Int direction, int length)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            Vector3Int cell = start + new Vector3Int(direction.x * i, direction.y * i, 0);
+
+            // 실제 바닥이 있는 내부 칸에만 놓아 길목/외곽 벽을 덮어쓰지 않는다.
+            if (!floorTilemap.HasTile(cell) || wallTilemap.HasTile(cell)) continue;
+
+            wallTilemap.SetTile(cell, wallTile);
+        }
     }
 
     void DrawRoom(Room room)
