@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField]
-    RoomManager roomManager;
-    [SerializeField]
-    EnemySpawner spawner;
-    [SerializeField]
-    int hp;
+    [SerializeField] RoomManager roomManager;
+    [SerializeField] EnemySpawner spawner;
+    [SerializeField] DamageScreenEffect damageEffect;
+    [SerializeField] int hp;
 
     public int wavePeriod;
     public int maxExpansionStage;
@@ -80,6 +78,7 @@ public class WaveManager : MonoBehaviour
         if (waveRunning) nowEnemyNum -= 1;
 
         Sfx.PlayerDamage(Vector3.zero);
+        damageEffect.TakeDamage(hp, maxHp);
 
         if (hp <= 0)
         {
@@ -177,7 +176,7 @@ public class WaveManager : MonoBehaviour
         isGameOver = true;
         waveRunning = false;
 
-        EventBus.Publish("PlayerDie");
+        EventBus.Publish("GameOver");
         Sfx.GameOver();
 
         GameOverUI ui = GameOverUI.Ensure();
