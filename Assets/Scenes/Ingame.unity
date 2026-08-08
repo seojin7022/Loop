@@ -288,6 +288,34 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1122469379}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: holdThrehold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playbackSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playback.m_Name
+      value: Playback
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playback.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playback.m_SingletonActionBindings.Array.data[0].m_Id
+      value: cca7f515-d5db-4ced-8a37-0797316616d3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playback.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/space
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
+      propertyPath: playback.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Playback
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
