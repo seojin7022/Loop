@@ -67,6 +67,26 @@ public class SfxBank : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
+    /// <summary>런타임 생성 효과음을 지정한 이벤트에 연결한다.</summary>
+    public void SetEntry(string id, AudioClip clip, float volume, float minInterval)
+    {
+        if (string.IsNullOrEmpty(id) || clip == null) return;
+
+        Entry entry = entries.Find(item => item.id == id);
+        if (entry == null)
+        {
+            entry = new Entry { id = id };
+            entries.Add(entry);
+        }
+
+        entry.clips = new List<AudioClip> { clip };
+        entry.volume = volume;
+        entry.minInterval = minInterval;
+
+        if (map != null)
+            map[id] = entry;
+    }
+
     public void Play(string id, Vector3 position)
     {
         if (map == null || !map.TryGetValue(id, out Entry entry)) return;

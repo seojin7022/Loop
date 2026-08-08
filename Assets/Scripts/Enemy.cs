@@ -24,13 +24,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] float deathRingRadius = 0.9f;
 
     Vector3 spawn, target;
-    float speed, hp;
+    float speed, hp, maxHp;
+    EnemyHealthBar healthBar;
     bool isDestroyed;
 
     /// 오라 중첩 방지용. 여러 거울의 오라가 있어도 이 간격보다 자주 피해를 받지 않는다.
     float lastAuraDamageTime = float.NegativeInfinity;
 
     public bool IsAlive => !isDestroyed;
+
+    void Awake()
+    {
+        healthBar = GetComponent<EnemyHealthBar>();
+        if (healthBar == null)
+            healthBar = gameObject.AddComponent<EnemyHealthBar>();
+    }
 
     void OnEnable() => All.Add(this);
     void OnDisable() => All.Remove(this);
@@ -40,7 +48,9 @@ public class Enemy : MonoBehaviour
         spawn = spawnPos;
         target = targetPos;
         this.speed = speed;
-        this.hp = hp;
+        maxHp = Mathf.Max(0.01f, hp);
+        this.hp = maxHp;
+        healthBar.SetMaxHealth(maxHp);
 
         MoveToTarget().Forget();
     }
@@ -70,9 +80,10 @@ public class Enemy : MonoBehaviour
     {
         if (isDestroyed) return;
 
-        hp -= amount;
+        hp = Mathf.Max(0f, hp - amount);
+        healthBar.ShowHealth(hp / maxHp);
 
-        if (hp > 0)
+        if (hp > 0f)
         {
             PlayHitFeedback(hitPoint);
             return;

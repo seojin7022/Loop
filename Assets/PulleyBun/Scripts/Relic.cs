@@ -20,6 +20,9 @@ namespace PulleyBun
         /// 활성 하수인 최대 수 (기획서: 거울 개수 ×2와 조합 시 과밀 방지)
         public const int MaxActiveMinions = 5;
 
+        // 게임 밸런스·화면 확인용 전역 스위치. 다시 켜려면 true로 변경한다.
+        public static bool IsEnabled = false;
+
         [SerializeField] List<Relic> relics;
 
         public static RelicManager Instance;
@@ -46,7 +49,7 @@ namespace PulleyBun
         /// RelicManager가 없는 씬(테스트 씬 등)에서도 안전하게 쓰기 위한 정적 조회.
         public static bool Has(Relic relic)
         {
-            return Instance != null && Instance.HasRelic(relic);
+            return IsEnabled && Instance != null && Instance.HasRelic(relic);
         }
 
         public void AddRelic(Relic relic)

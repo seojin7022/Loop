@@ -106,7 +106,13 @@ public class WaveManager : MonoBehaviour
 
         if (this == null || isGameOver) return;
 
-        List<SpawnLane> lanes = spawner.BuildLanes();
+        // 방 증축과 함께 내부 반사벽도 스테이지에 맞게 다시 배치한다.
+        if (roomManager != null)
+            roomManager.ApplyArenaLayout(CurrentStage);
+
+        List<SpawnLane> lanes = spawner.BuildLanes(currrentWave, SafePeriod);
+        if (this == null || isGameOver) return;
+
         int expected = spawner.GetWaveEnemyCount(currrentWave, SafePeriod, lanes.Count);
 
         if (wavePreviewEnabled && lanes.Count > 0)
