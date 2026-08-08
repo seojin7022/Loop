@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
-{
+{    
     int currentRow = 0;
 
     // 한 줄 안에서 방이 붙는 순서
@@ -66,6 +66,9 @@ public class RoomManager : MonoBehaviour
         return true;
     }
 
+
+    [SerializeField] WaveManager waveManager;
+
     [Header("Tilemaps")]
     public Tilemap floorTilemap;
     public Tilemap wallTilemap;
@@ -81,11 +84,18 @@ public class RoomManager : MonoBehaviour
     [Header("Room Data")]
     [SerializeField] List<RoomTypeData> roomTypeDatas = new();
 
+    [Header("Bumper Data")]
+    [SerializeField] int randomBumperStage;
+    [SerializeField] List<BumperInfo> bumperListLeft = new();
+    [SerializeField] List<BumperInfo> bumperListRight = new();
+
     Dictionary<RoomType, RoomTypeData> roomDataMap;
 
     Dictionary<Vector2Int, Room> rooms = new();
 
     public IReadOnlyDictionary<Vector2Int, Room> Rooms => rooms;
+
+    System.Random rand = new();
 
     void Awake()
     {
@@ -212,28 +222,31 @@ public class RoomManager : MonoBehaviour
     // 외곽 벽과 같은 타일맵/레이어를 쓰므로 공이 이 벽에서도 그대로 반사된다.
     void DrawStageBumpers()
     {
-        if (rooms.Count == 0) return;
+        if(rooms.Count == 0 || bumperListLeft.Count == 0 || bumperListRight.Count == 0) return;
 
-        Vector3Int center = floorTilemap.WorldToCell(RoomsBounds().center);
+        int num = waveManager.CurrentStage;
 
-        switch (3 * currentRow + currentStage)
+        if(num == 5)
+            AddBumper(bumperListLeft[0]);
+        else if(num == 6)
         {
-            case 5:
-                AddBumper(center + new Vector3Int(-8, 0, 0), Vector2Int.left, 6);
-                break;
-
-            case 6:
-                AddBumper(center + new Vector3Int(-8, 0, 0), Vector2Int.left, 6);
-                AddBumper(center + new Vector3Int(8, 0, 0), Vector2Int.right, 6);
-                break;
+            AddBumper(bumperListLeft[0]);
+            AddBumper(bumperListRight[0]);
+        }
+        else if(num >= randomBumperStage)
+        {
+            AddBumper(bumperListLeft[rand.Next(bumperListLeft.Count)]);
+            AddBumper(bumperListRight[rand.Next(bumperListRight.Count)]);
         }
     }
 
-    void AddBumper(Vector3Int start, Vector2Int direction, int length)
+    void AddBumper(BumperInfo info)
     {
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < info.length; i++)
         {
-            Vector3Int cell = start + new Vector3Int(direction.x * i, direction.y * i, 0);
+            Vector3Int cell = floorTilemap.WorldToCell(RoomsBounds().center)
+                            + info.bumperPosition
+                            + new Vector3Int(info.direction.x * i, info.direction.y * i, 0);
 
             // 실제 바닥이 있는 내부 칸에만 놓아 길목/외곽 벽을 덮어쓰지 않는다.
             if (!floorTilemap.HasTile(cell) || wallTilemap.HasTile(cell)) continue;
@@ -331,4 +344,12 @@ public class RoomManager : MonoBehaviour
             gridPos.y * roomHeight,
             0);
     }
+}
+
+[Serializable]
+public class BumperInfo
+{
+    public Vector3Int bumperPosition;
+    public Vector2Int direction;
+    public int length;
 }
