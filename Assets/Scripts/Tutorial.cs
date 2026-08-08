@@ -9,7 +9,6 @@ public class Tutorial : MonoBehaviour
     [Serializable]
     public class Step
     {
-        public string speaker;
         [TextArea] public string dialogue;
 
         [Tooltip("비워두면 아무 키/클릭으로 넘어감. 값이 있으면 Tutorial.Trigger(\"값\") 호출 시에만 넘어감")]
@@ -23,7 +22,6 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject panel;
 
     [Header("Panel")]
-    [SerializeField] TMP_Text nameLabel;
     [SerializeField] TMP_Text dialogueLabel;
 
     static Tutorial instance;
@@ -66,7 +64,6 @@ public class Tutorial : MonoBehaviour
         Show(true);
 
         Step step = steps[index];
-        if (nameLabel) nameLabel.text = step.speaker;
         if (dialogueLabel) dialogueLabel.text = step.dialogue;
     }
 
