@@ -12,30 +12,51 @@ public class Room
     {
         GridPos = gridPos;
         StartWave = wave;
-        Type = DecideRoomType(gridPos, wave / 3);
+
+        Type = DecideRoomType(
+            gridPos,
+            wave / 3
+        );
     }
 
-    RoomType DecideRoomType(Vector2Int pos, int bottomRow)
+    public void UpdateType(int bottomRow)
     {
-        RoomType res = RoomType.Center;
+        Type = DecideRoomType(
+            GridPos,
+            bottomRow
+        );
+    }
 
-        if(pos.x < 0)
-            res = RoomType.TopLeft;
-        else if(pos.x > 0)
-            res = RoomType.TopRight;
-        
-        if(pos.y > bottomRow)
-            res |= RoomType.TopCenter;
+    private RoomType DecideRoomType(Vector2Int pos, int bottomRow)
+    {
+        if (pos.y > bottomRow)
+        {
+            if (pos.x < 0)
+                return RoomType.TopLeft;
 
-        return res;
+            if (pos.x > 0)
+                return RoomType.TopRight;
+
+            return RoomType.TopCenter;
+        }
+
+        if (pos.x < 0)
+            return RoomType.Left;
+
+        if (pos.x > 0)
+            return RoomType.Right;
+
+        return RoomType.Center;
     }
 }
 
 public enum RoomType
 {
     Center = 0,
+
     Left = 1,
     Right = 2,
+
     TopCenter = 4,
     TopLeft = 5,
     TopRight = 6
