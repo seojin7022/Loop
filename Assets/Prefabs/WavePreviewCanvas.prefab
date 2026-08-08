@@ -65,7 +65,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uC6E8\uC774\uBE0C 1 \xB7  \uC801 4\uB9C8\uB9AC\\n<size=70%><color=#2a4366>Space
+    \uB97C \uB20C\uB7EC \uC2DC\uC791</color></size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee449ba2b3f8c9242a8f6ed0c1b0a584, type: 2}
   m_sharedMaterial: {fileID: -5278417327965783769, guid: ee449ba2b3f8c9242a8f6ed0c1b0a584, type: 2}
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

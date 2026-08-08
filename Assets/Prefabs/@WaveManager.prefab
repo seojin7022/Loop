@@ -137,12 +137,12 @@ MonoBehaviour:
   pathColor: {r: 1, g: 0.35, b: 0.4, a: 0.9}
   spawnMarkerColor: {r: 1, g: 0.45, b: 0.45, a: 0.95}
   targetMarkerColor: {r: 1, g: 0.85, b: 0.35, a: 0.9}
-  spawnMarkerSize: 0.42
+  spawnMarkerSize: 0.6
   targetMarkerSize: 0.3
   leadInSeconds: 10
   pauseDuringPreview: 0
   allowSkip: 1
   keepDuringWave: 1
   dimmedAlpha: 0.22
-  heartSprite: {fileID: 0}
+  heartSprite: {fileID: -3561148701943319872, guid: 36f4d30ecc6e21748af97fcb52564d6e, type: 3}
   canvas_pref: {fileID: 8418510422263108412, guid: d24562e28823b4eb9ac9630476e5c473, type: 3}
