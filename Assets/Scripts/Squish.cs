@@ -10,12 +10,13 @@ public class Squish : MonoBehaviour
     public void DoSquash(Vector2 normal)
     {
         Vector3 squashVector = new Vector3(
-            Mathf.Abs(normal.x) * -squashAmount + Mathf.Abs(normal.y) * squashAmount,
-            Mathf.Abs(normal.y) * -squashAmount + Mathf.Abs(normal.x) * squashAmount,
-            0
+            1f - squashAmount,
+            1f + squashAmount,
+            1f
         );
 
-        transform.DOKill(true);
-        transform.DOPunchScale(squashVector, duration, 5, 0.5f);
+        transform.DOKill();
+        transform.localScale = squashVector;
+        transform.DOScale(Vector3.one, duration).SetEase(Ease.OutElastic);
     }
 }

@@ -17,11 +17,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] float hitFlashDuration = 0.09f;
     [SerializeField] Color hitParticleColor = new(1f, 0.92f, 0.6f, 1f);
     [SerializeField] Color deathParticleColor = new(1f, 0.55f, 0.45f, 1f);
+    [SerializeField] Color damageParticleColor = new(0f, 0.45f, 1f, 0.5f);
     [SerializeField] int hitParticleCount = 6;
     [SerializeField] int deathParticleCount = 14;
+    [SerializeField] int damageParticleCount = 17;
 
     [Tooltip("처치 시 터지는 링의 최종 반지름")]
     [SerializeField] float deathRingRadius = 0.9f;
+    [SerializeField] float damageRingRadius = 1.4f;
+
+    [SerializeField] Transform spriteTransform;
 
     Vector3 spawn, target;
     float speed, hp, maxHp;
@@ -51,8 +56,10 @@ public class Enemy : MonoBehaviour
         maxHp = Mathf.Max(0.01f, hp);
         this.hp = maxHp;
         healthBar.SetMaxHealth(maxHp);
+        spriteTransform.localScale = new Vector3(0f, 0f, 1f);
 
         MoveToTarget().Forget();
+        SpawnScaleUp().Forget();
     }
 
     public async UniTask MoveToTarget()
@@ -69,7 +76,13 @@ public class Enemy : MonoBehaviour
 
         isDestroyed = true;
         EventBus.Publish("PlayerDamage");
+        PlayDamageFeedback();
         Destroy(gameObject);
+    }
+
+    public async UniTask SpawnScaleUp()
+    {
+        await spriteTransform.DOScale(1f, 0.5f).SetEase(Ease.OutExpo);
     }
 
     /// 탄환·하수인·오라 등 모든 피해 진입점.
@@ -124,6 +137,19 @@ public class Enemy : MonoBehaviour
         Fx.Ring(position, 0.1f, deathRingRadius, deathParticleColor, width: 0.12f, duration: 0.28f);
 
         Sfx.EnemyDie(position);
+    }
+
+    void PlayDamageFeedback()
+    {
+        Vector3 position = transform.position;
+
+        Fx.HitBurst(
+            position, damageParticleColor, damageParticleCount,
+            speed: 5.5f, size: 0.17f, lifetime: 0.32f);
+
+        Fx.Ring(position, 0.1f, damageRingRadius, damageParticleColor, width: 0.12f, duration: 0.28f);
+
+        // TODO: SFX
     }
 
     /// 거울 오라 전용 피해. interval 안에 이미 오라 피해를 받았다면 무시해 중첩을 막는다.
