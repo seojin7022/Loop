@@ -12,9 +12,6 @@ public class Tutorial : MonoBehaviour
         public string speaker;
         [TextArea] public string dialogue;
 
-        [Tooltip("비워두면 character 이미지 유지, 넣으면 교체 (표정/캐릭터 변경)")]
-        public Sprite portrait;
-
         [Tooltip("비워두면 아무 키/클릭으로 넘어감. 값이 있으면 Tutorial.Trigger(\"값\") 호출 시에만 넘어감")]
         public string completeOn;
     }
@@ -22,7 +19,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] Step[] steps;
 
     [Header("Canvas")]
-    [SerializeField] Image character;
+
     [SerializeField] GameObject panel;
 
     [Header("Panel")]
@@ -71,12 +68,10 @@ public class Tutorial : MonoBehaviour
         Step step = steps[index];
         if (nameLabel) nameLabel.text = step.speaker;
         if (dialogueLabel) dialogueLabel.text = step.dialogue;
-        if (character && step.portrait) character.sprite = step.portrait;
     }
 
     void Show(bool on)
     {
         if (panel) panel.SetActive(on);
-        if (character) character.gameObject.SetActive(on);
     }
 }
