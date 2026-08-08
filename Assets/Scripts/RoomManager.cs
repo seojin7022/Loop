@@ -5,12 +5,33 @@ using UnityEngine.Tilemaps;
 public class RoomManager : MonoBehaviour
 {
     int currentRow = 0;
-    int currentStage = 0;
+
+    // 한 줄 안에서 방이 붙는 순서
     // 0 = 가운데
     // 1 = 왼쪽
     // 2 = 오른쪽
+    int currentStage = 0;
 
-    int bottomRow = 0;
+    /// 현재 남아 있는 방 중 가장 아래 줄. 방이 삭제되면 함께 올라간다.
+    public int BottomRow
+    {
+        get
+        {
+            bool found = false;
+            int min = 0;
+
+            foreach (Vector2Int pos in rooms.Keys)
+            {
+                if (!found || pos.y < min)
+                {
+                    min = pos.y;
+                    found = true;
+                }
+            }
+
+            return min;
+        }
+    }
 
     void Start()
     {
@@ -20,26 +41,15 @@ public class RoomManager : MonoBehaviour
 
     public bool SpawnNextRoom()
     {
-        Vector2Int pos;
-
-        int currentWave = 3 * currentRow + currentStage;
-
-        switch (currentWave)
+        // 붙일 위치는 '몇 번째 확장인지'가 아니라 줄 안에서의 순서(currentStage)로 정해진다.
+        Vector2Int pos = currentStage switch
         {
-            case 0:
-                pos = new Vector2Int(0, currentRow);
-                break;
+            0 => new Vector2Int(0, currentRow),
+            1 => new Vector2Int(-1, currentRow),
+            _ => new Vector2Int(1, currentRow),
+        };
 
-            case 1:
-                pos = new Vector2Int(-1, currentRow);
-                break;
-
-            default:
-                pos = new Vector2Int(1, currentRow);
-                break;
-        }
-
-        CreateRoom(pos, currentWave);
+        CreateRoom(pos, 3 * currentRow + currentStage);
 
         currentStage++;
 
@@ -49,12 +59,9 @@ public class RoomManager : MonoBehaviour
             currentRow++;
         }
 
-        // 새로운 줄의 가운데가 생성된 직후 삭제
-        if (currentStage == 1 && currentRow - bottomRow > 1)
-        {
-            DeleteRow(bottomRow);
-            bottomRow++;
-        }
+        // 새로운 줄의 가운데가 생성된 직후, 두 줄 아래는 삭제한다.
+        if (currentStage == 1 && currentRow - BottomRow > 1)
+            DeleteRow(BottomRow);
 
         return true;
     }
@@ -88,15 +95,23 @@ public class RoomManager : MonoBehaviour
             roomDataMap[data.roomType] = data;
     }
 
+    static readonly List<SpawnPointData> emptySpawnPoints = new();
+
     public List<SpawnPointData> GetSpawnPoints(Room room)
     {
-        return roomDataMap[room.Type].spawnPoints;
+        if (room == null || roomDataMap == null) return emptySpawnPoints;
+
+        if (roomDataMap.TryGetValue(room.Type, out RoomTypeData data) && data.spawnPoints != null)
+            return data.spawnPoints;
+
+        Debug.LogWarning($"[RoomManager] RoomType '{room.Type}' 의 Room Data(스폰 포인트)가 없습니다.");
+        return emptySpawnPoints;
     }
 
     public Vector3 LocalToWorld(Vector2 localPos)
     {
         Vector3Int referenceCell =
-            RoomOrigin(new Vector2Int(0, bottomRow))
+            RoomOrigin(new Vector2Int(0, BottomRow))
             + new Vector3Int(roomWidth / 2, 0, 0);
 
         Vector3 referencePosition =
@@ -125,16 +140,72 @@ public class RoomManager : MonoBehaviour
         rooms.Remove(new Vector2Int(0, row));
         rooms.Remove(new Vector2Int(1, row));
 
+        NormalizeRows();
         DrawAllRooms();
+    }
+
+    /// <summary>
+    /// 아래 줄이 사라져도 전투 공간이 항상 0번 줄에서 시작하도록 남은 방을 아래로 당긴다.
+    /// 이렇게 하지 않으면 LocalToWorld 의 기준점이 한 방 높이만큼 위로 뛰면서
+    /// 월드에 고정된 캐논·설치된 거울·날아가던 공이 전투 공간 밖에 남는다.
+    /// </summary>
+    void NormalizeRows()
+    {
+        int bottom = BottomRow;
+        if (bottom == 0 || rooms.Count == 0) return;
+
+        var shifted = new Dictionary<Vector2Int, Room>(rooms.Count);
+
+        foreach (Room room in rooms.Values)
+        {
+            room.GridPos = new Vector2Int(room.GridPos.x, room.GridPos.y - bottom);
+            shifted[room.GridPos] = room;
+        }
+
+        rooms = shifted;
+        currentRow -= bottom;
     }
 
     void DrawAllRooms()
     {
+        // 아래 줄이 삭제되면 위쪽 방이 아래 줄이 되므로, 방 타입을 매번 다시 계산한다.
+        RefreshRoomTypes();
+
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
 
         foreach(Room room in rooms.Values)
             DrawRoom(room);
+
+        EventBus.Publish("RoomsChanged");
+    }
+
+    void RefreshRoomTypes()
+    {
+        int bottom = BottomRow;
+
+        foreach (Room room in rooms.Values)
+            room.Type = Room.DecideRoomType(room.GridPos, bottom);
+    }
+
+    /// 현재 남아있는 방 전체를 감싸는 월드 영역 (카메라 프레이밍용)
+    public Bounds RoomsBounds()
+    {
+        Vector2Int min = new(int.MaxValue, int.MaxValue);
+        Vector2Int max = new(int.MinValue, int.MinValue);
+
+        foreach (Vector2Int pos in rooms.Keys)
+        {
+            min = Vector2Int.Min(min, pos);
+            max = Vector2Int.Max(max, pos);
+        }
+
+        Bounds bounds = new();
+        bounds.SetMinMax(
+            floorTilemap.CellToWorld(new Vector3Int(min.x * roomWidth, min.y * roomHeight, 0)),
+            floorTilemap.CellToWorld(new Vector3Int((max.x + 1) * roomWidth, (max.y + 1) * roomHeight, 0)));
+
+        return bounds;
     }
 
     void DrawRoom(Room room)
@@ -187,7 +258,7 @@ public class RoomManager : MonoBehaviour
 
             // 현재 존재하는 방 중 가장 아래 중앙 방
             // 아래쪽 벽의 중앙 타일 제거
-            if (room.GridPos.x == 0 && room.GridPos.y == bottomRow)
+            if (room.GridPos.x == 0 && room.GridPos.y == BottomRow)
             {
                 int centerX = roomWidth / 2;
 

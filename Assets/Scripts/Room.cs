@@ -12,19 +12,26 @@ public class Room
     {
         GridPos = gridPos;
         StartWave = wave;
-        Type = DecideRoomType(gridPos, wave / 3);
+
+        // 실제 타입은 RoomManager 가 현재 BottomRow 기준으로 곧바로 다시 계산한다.
+        Type = DecideRoomType(gridPos, gridPos.y);
     }
 
-    RoomType DecideRoomType(Vector2Int pos, int bottomRow)
+    /// <summary>
+    /// 방의 가로 위치(좌·중앙·우)와, 아래 줄인지 위 줄인지로 타입을 정한다.
+    /// RoomType 의 TopCenter(4) 는 '위 줄' 플래그로 쓰인다.
+    /// Left(1) | TopCenter(4) = TopLeft(5), Right(2) | TopCenter(4) = TopRight(6).
+    /// </summary>
+    public static RoomType DecideRoomType(Vector2Int pos, int bottomRow)
     {
         RoomType res = RoomType.Center;
 
-        if(pos.x < 0)
-            res = RoomType.TopLeft;
-        else if(pos.x > 0)
-            res = RoomType.TopRight;
-        
-        if(pos.y > bottomRow)
+        if (pos.x < 0)
+            res = RoomType.Left;
+        else if (pos.x > 0)
+            res = RoomType.Right;
+
+        if (pos.y > bottomRow)
             res |= RoomType.TopCenter;
 
         return res;

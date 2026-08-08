@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.BallMaker
   ballPrefab: {fileID: 7680888765245675513, guid: 0a167e99e359f9a4dacb754bd977a6fb, type: 3}
-  speed: 2
+  speed: 5
   spawnInterval: 0.7
 --- !u!1001 &5603323274609603032
 PrefabInstance:
