@@ -12,7 +12,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     int hp;
 
-    public int wavePeriod;
+    public int wavePerStage;
+    public int maxExpansionStage;
 
     [Header("페이즈")]
     [Tooltip("스테이지 시작 전 특성 3택 1 선택 화면을 띄운다.")]
@@ -37,7 +38,7 @@ public class WaveManager : MonoBehaviour
     public bool IsWaveRunning => waveRunning;
     public int CurrentStage => StageTable.StageOfWave(currrentWave, SafePeriod);
 
-    int SafePeriod => Mathf.Max(1, wavePeriod);
+    int SafePeriod => Mathf.Max(1, wavePerStage);
 
     public void Awake()
     {
@@ -108,11 +109,12 @@ public class WaveManager : MonoBehaviour
 
         // 방 증축과 함께 내부 반사벽도 스테이지에 맞게 다시 배치한다.
         if (roomManager != null)
-            roomManager.ApplyArenaLayout(CurrentStage);
+            roomManager.DrawAllRooms();
 
         List<SpawnLane> lanes = spawner.BuildLanes(currrentWave, SafePeriod);
         if (this == null || isGameOver) return;
-
+
+
         int expected = spawner.GetWaveEnemyCount(currrentWave, SafePeriod, lanes.Count);
 
         if (wavePreviewEnabled && lanes.Count > 0)
@@ -133,7 +135,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = true;
         nowEnemyNum = spawner.SpawnWave(currrentWave, SafePeriod);
 
-        if (nowEnemyNum <= 0)
+        if(nowEnemyNum <= 0)
         {
             // 진입 라인이 없거나 처치 목표가 0이면 더 진행할 수 없다. 무한 루프를 막고 알린다.
             waveRunning = false;
@@ -158,7 +160,7 @@ public class WaveManager : MonoBehaviour
         currrentWave++;
 
         // 일정 웨이브마다 방을 확장한다.
-        if (currrentWave % SafePeriod == 0 && roomManager != null)
+        if (roomManager != null && currrentWave % SafePeriod == 0 && CurrentStage <= maxExpansionStage)
         {
             roomManager.SpawnNextRoom();
             Sfx.RoomAdded();
