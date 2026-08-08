@@ -145,4 +145,5 @@ MonoBehaviour:
   keepDuringWave: 1
   dimmedAlpha: 0.22
   heartSprite: {fileID: -3561148701943319872, guid: 36f4d30ecc6e21748af97fcb52564d6e, type: 3}
+  arrowSprite: {fileID: 3980168229369012863, guid: eec306adb312f584f9b8cba0a3237f7c, type: 3}
   canvas_pref: {fileID: 8418510422263108412, guid: d24562e28823b4eb9ac9630476e5c473, type: 3}
