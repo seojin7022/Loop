@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     int hp;
 
     public int wavePeriod;
+    public int maxExpansionStage;
 
     [Header("페이즈")]
     [Tooltip("스테이지 시작 전 특성 3택 1 선택 화면을 띄운다.")]
@@ -108,16 +109,17 @@ public class WaveManager : MonoBehaviour
 
         // 방 증축과 함께 내부 반사벽도 스테이지에 맞게 다시 배치한다.
         if (roomManager != null)
-            roomManager.ApplyArenaLayout(CurrentStage);
+            roomManager.DrawAllRooms();
 
         List<SpawnLane> lanes = spawner.BuildLanes(currrentWave, SafePeriod);
         if (this == null || isGameOver) return;
-
+
+
         int expected = spawner.GetWaveEnemyCount(currrentWave, SafePeriod, lanes.Count);
 
         if (wavePreviewEnabled && lanes.Count > 0)
         {
-            WavePreview preview = WavePreview.Ensure();
+            var preview = WavePreview.Instance;
             if (preview != null) await preview.ShowAndWaitAsync(currrentWave, expected, lanes);
         }
 
@@ -158,7 +160,7 @@ public class WaveManager : MonoBehaviour
         currrentWave++;
 
         // 일정 웨이브마다 방을 확장한다.
-        if (currrentWave % SafePeriod == 0 && roomManager != null)
+        if (roomManager != null && currrentWave % SafePeriod == 0 && CurrentStage <= maxExpansionStage)
         {
             roomManager.SpawnNextRoom();
             Sfx.RoomAdded();

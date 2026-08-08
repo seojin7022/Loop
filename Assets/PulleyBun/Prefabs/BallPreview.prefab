@@ -48,6 +48,13 @@ MonoBehaviour:
   predictDepth: 60
   predictLength: 100
   lineRenderer: {fileID: 5808097696754945368}
+  color: {r: 1, g: 0.61573917, b: 0, a: 0.85}
+  width: 0.1
+  sortingOrder: 1
+  dashed: 1
+  dashLength: 0.3
+  duplicateAngle: 10
+  branchAlpha: 0.7
 --- !u!120 &5808097696754945368
 LineRenderer:
   serializedVersion: 3

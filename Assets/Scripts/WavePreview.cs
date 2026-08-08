@@ -42,22 +42,6 @@ public class WavePreview : MonoBehaviour
     TMP_Text prompt;
     bool startRequested;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    static void Bootstrap()
-    {
-        if (Instance != null) return;
-
-        var go = new GameObject("@WavePreview");
-        go.AddComponent<WavePreview>();
-    }
-
-    /// 아직 생성되지 않았다면 만들어서 반환한다.
-    public static WavePreview Ensure()
-    {
-        if (Instance == null) Bootstrap();
-        return Instance;
-    }
-
     void Awake()
     {
         if (Instance != null && Instance != this)

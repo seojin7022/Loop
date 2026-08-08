@@ -6,6 +6,7 @@ namespace PulleyBun
     {
         [SerializeField] Vector2 velocity;
         int layerMask;
+        int layerMaskWall;
         Squish squish;
         Rigidbody2D rb;
 
@@ -33,6 +34,7 @@ namespace PulleyBun
         {
             rb = GetComponent<Rigidbody2D>();
             layerMask = LayerMask.GetMask("Line");
+            layerMaskWall = LayerMask.GetMask("Wall");
             squish = GetComponent<Squish>();
         }
 
@@ -49,6 +51,12 @@ namespace PulleyBun
             var move = velocity * Time.fixedDeltaTime;
             var position = transform.position;
             var direction = transform.right;
+            var hitWall = Physics2D.Raycast(position, direction, move.magnitude, layerMaskWall);
+            if (hitWall)
+            {
+                Destroy(gameObject);
+                return;
+            }
             var hit = Physics2D.Raycast(position, direction, move.magnitude, layerMask);
             if (hit)
             {
@@ -99,14 +107,6 @@ namespace PulleyBun
             if (hit && squish != null)
             {
                 squish.DoSquash(transform.InverseTransformDirection(hit.normal));
-            }
-        }
-
-        public void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                Destroy(gameObject);
             }
         }
     }
