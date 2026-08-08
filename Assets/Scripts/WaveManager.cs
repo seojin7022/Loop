@@ -108,7 +108,7 @@ public class WaveManager : MonoBehaviour
 
         // 방 증축과 함께 내부 반사벽도 스테이지에 맞게 다시 배치한다.
         if (roomManager != null)
-            roomManager.ApplyArenaLayout(CurrentStage);
+            roomManager.DrawAllRooms();
 
         List<SpawnLane> lanes = spawner.BuildLanes(currrentWave, SafePeriod);
         if (this == null || isGameOver) return;
@@ -159,7 +159,7 @@ public class WaveManager : MonoBehaviour
         currrentWave++;
 
         // 일정 웨이브마다 방을 확장한다.
-        if (currrentWave % SafePeriod == 0 && roomManager != null)
+        if (roomManager != null && currrentWave % SafePeriod == 0 && CurrentStage <= maxExpansionStage)
         {
             roomManager.SpawnNextRoom();
             Sfx.RoomAdded();
