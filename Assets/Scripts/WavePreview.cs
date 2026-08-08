@@ -37,6 +37,8 @@ public class WavePreview : MonoBehaviour
 
     [SerializeField] float dimmedAlpha = 0.22f;
 
+    [SerializeField] Sprite heartSprite;
+
     readonly List<GameObject> markers = new();
     Canvas canvas;
     TMP_Text prompt;
@@ -140,10 +142,10 @@ public class WavePreview : MonoBehaviour
 
         markers.Add(pathObject);
         markers.Add(CreateMarker("WavePreviewSpawn", spawn, spawnMarkerSize, spawnMarkerColor, 2));
-        markers.Add(CreateMarker("WavePreviewTarget", target, targetMarkerSize, targetMarkerColor, 2));
+        markers.Add(CreateMarker("WavePreviewTarget", target, targetMarkerSize, targetMarkerColor, 2, true));
     }
 
-    GameObject CreateMarker(string name, Vector3 position, float size, Color color, int sortingOrder)
+    GameObject CreateMarker(string name, Vector3 position, float size, Color color, int sortingOrder, bool heart = false)
     {
         var go = new GameObject(name);
         go.transform.SetParent(transform, false);
@@ -151,7 +153,7 @@ public class WavePreview : MonoBehaviour
         go.transform.localScale = Vector3.one * size;
 
         var renderer = go.AddComponent<SpriteRenderer>();
-        renderer.sprite = RuntimeGfx.Circle;
+        renderer.sprite = heart ? heartSprite : RuntimeGfx.Circle;
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
 
@@ -207,6 +209,7 @@ public class WavePreview : MonoBehaviour
 
             if (marker.TryGetComponent(out SpriteRenderer sprite))
             {
+                if (sprite.sprite == heartSprite) continue;
                 Color c = sprite.color;
                 c.a = dimmedAlpha;
                 sprite.color = c;
