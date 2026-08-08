@@ -82,6 +82,13 @@ namespace PulleyBun
                 {
                     Instantiate(splashPrefab, hit.point, Quaternion.identity);
                 }
+
+                // 거울에 끼이는 경우 방지
+                var getOutMove = direction * Preview.RayMargin;
+                while (hit.collider.OverlapPoint(position))
+                {
+                    position += getOutMove;
+                }
             }
             else
             {
