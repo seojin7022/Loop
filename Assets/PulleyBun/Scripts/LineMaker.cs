@@ -152,7 +152,7 @@ namespace PulleyBun
             Vector3 center = (a + b) * 0.5f;
 
             Fx.Segment(a, b, unavailablePlaceColor,
-                width: placePulseWidth, duration: 0.22f);
+                width: 0, duration: 0.22f);
         }
 
         void OnDrag(Vector2 position)

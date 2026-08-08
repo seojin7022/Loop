@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.LinePreview
   spriteRenderer: {fileID: 5894855798982921440}
-  unavailableColor: {r: 0.6, g: 0.2, b: 0.2, a: 0.5}
+  unavailableColor: {r: 0.9496855, g: 0.15828082, b: 0.15828082, a: 0.5}
 --- !u!1 &4450613006933839450
 GameObject:
   m_ObjectHideFlags: 0
