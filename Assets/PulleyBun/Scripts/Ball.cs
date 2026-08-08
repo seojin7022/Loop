@@ -12,7 +12,6 @@ namespace PulleyBun
 
         bool firstBounce = true;
         [SerializeField] float duplicateAngle = 10f;
-        [SerializeField] GameObject splashPrefab;
 
         /// 번식 특성으로 갈라질 때의 각도. 예상 궤적선이 같은 값을 쓰도록 노출한다.
         public float DuplicateAngle => duplicateAngle;
@@ -86,11 +85,6 @@ namespace PulleyBun
                 velocity = direction * velocity.magnitude;
 
                 Sfx.BallBounce(hit.point);
-
-                if (RelicManager.Has(Relic.MirrorSplash) && splashPrefab != null)
-                {
-                    Instantiate(splashPrefab, hit.point, Quaternion.identity);
-                }
 
                 // 거울에 끼이는 경우 방지
                 var getOutMove = direction * Preview.RayMargin;
