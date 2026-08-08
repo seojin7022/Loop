@@ -21,7 +21,7 @@ namespace PulleyBun
         public const int MaxActiveMinions = 5;
 
         // 게임 밸런스·화면 확인용 전역 스위치. 다시 켜려면 true로 변경한다.
-        public static bool IsEnabled = false;
+        public static bool IsEnabled = true;
 
         [SerializeField] List<Relic> relics;
 

@@ -99,7 +99,8 @@ public class WaveManager : MonoBehaviour
         await UniTask.Yield(PlayerLoopTiming.Update);
         if (this == null || isGameOver) return;
 
-        if (relicSelectionEnabled && currrentWave % SafePeriod == 0)
+        // 1 스테이지는 특성 선택을 건너뛴다.
+        if (relicSelectionEnabled && currrentWave % SafePeriod == 0 && CurrentWave >= wavePeriod)
         {
             RelicSelectUI ui = RelicSelectUI.Ensure();
             if (ui != null) await ui.ShowAndWaitAsync();
