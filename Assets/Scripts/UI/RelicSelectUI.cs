@@ -18,6 +18,9 @@ public class RelicSelectUI : MonoBehaviour
 
     const int ChoiceCount = 3;
 
+    /// Assets/Resources 기준 경로. 카드 개수·레이아웃은 이 프리팹이 결정한다.
+    const string PrefabPath = "RelicSelectCanvas";
+
     Canvas canvas;
     Relic? picked;
 
@@ -83,81 +86,45 @@ public class RelicSelectUI : MonoBehaviour
 
     void Build(List<Relic> choices)
     {
-        canvas = RuntimeUI.CreateCanvas("RelicSelectCanvas", 500);
-
-        RuntimeUI.CreateFullScreen("Dim", canvas.transform, new Color(0f, 0f, 0f, 0.72f));
-
-        TMP_Text title = RuntimeUI.CreateText(
-            "Title", canvas.transform, "특성 선택",
-            72f, Color.white, TextAlignmentOptions.Center);
-        var titleRect = (RectTransform)title.transform;
-        titleRect.anchorMin = new Vector2(0.5f, 1f);
-        titleRect.anchorMax = new Vector2(0.5f, 1f);
-        titleRect.pivot = new Vector2(0.5f, 1f);
-        titleRect.anchoredPosition = new Vector2(0f, -110f);
-        titleRect.sizeDelta = new Vector2(900f, 100f);
-
-        TMP_Text subtitle = RuntimeUI.CreateText(
-            "Subtitle", canvas.transform, "하나를 골라 이번 런 동안 유지한다",
-            30f, new Color(1f, 1f, 1f, 0.65f), TextAlignmentOptions.Center);
-        var subtitleRect = (RectTransform)subtitle.transform;
-        subtitleRect.anchorMin = new Vector2(0.5f, 1f);
-        subtitleRect.anchorMax = new Vector2(0.5f, 1f);
-        subtitleRect.pivot = new Vector2(0.5f, 1f);
-        subtitleRect.anchoredPosition = new Vector2(0f, -210f);
-        subtitleRect.sizeDelta = new Vector2(900f, 50f);
-
-        const float cardWidth = 460f;
-        const float cardHeight = 560f;
-        const float gap = 40f;
-
-        float totalWidth = choices.Count * cardWidth + (choices.Count - 1) * gap;
-        float startX = -totalWidth * 0.5f + cardWidth * 0.5f;
-
-        for (int i = 0; i < choices.Count; i++)
+        GameObject prefab = Resources.Load<GameObject>(PrefabPath);
+        if (prefab == null)
         {
+            // 프리팹이 없으면 선택을 기다리는 쪽이 영원히 멈추므로 첫 후보로 진행한다.
+            Debug.LogError($"RelicSelectUI: Resources/{PrefabPath} 프리팹을 찾지 못했다.");
+            picked = choices[0];
+            return;
+        }
+
+        canvas = Instantiate(prefab).GetComponent<Canvas>();
+        canvas.sortingOrder = 500; // GameHud(300) 위에 그린다.
+        RuntimeUI.EnsureEventSystem();
+
+        Transform cards = canvas.transform.Find("Cards");
+
+        for (int i = 0; i < cards.childCount; i++)
+        {
+            Transform card = cards.GetChild(i);
+
+            // 프리팹의 카드 슬롯이 후보보다 많으면 남는 슬롯은 숨긴다.
+            if (i >= choices.Count)
+            {
+                card.gameObject.SetActive(false);
+                continue;
+            }
+
             Relic relic = choices[i];
             RelicInfo info = RelicDatabase.Get(relic);
 
-            Button button = RuntimeUI.CreateButton(
-                $"Card_{relic}", canvas.transform,
-                new Color(0.13f, 0.15f, 0.22f, 0.97f),
-                new Color(0.85f, 0.92f, 1f, 1f));
+            card.Find("Name").GetComponent<TMP_Text>().text = info?.DisplayName ?? relic.ToString();
+            card.Find("Description").GetComponent<TMP_Text>().text = info?.Description ?? "";
 
-            var rect = (RectTransform)button.transform;
-            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
-            rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.sizeDelta = new Vector2(cardWidth, cardHeight);
-            rect.anchoredPosition = new Vector2(startX + i * (cardWidth + gap), -60f);
+            var icon = card.Find("Icon").GetComponent<Image>();
+            icon.sprite = info?.Icon;
+            icon.enabled = icon.sprite != null;
 
             Relic captured = relic;
-            button.onClick.AddListener(() => picked = captured);
-
-            TMP_Text category = RuntimeUI.CreateText(
-                "Category", rect, info?.CategoryLabel ?? "",
-                26f, new Color(0.55f, 0.75f, 1f, 1f), TextAlignmentOptions.Center);
-            PlaceFromTop((RectTransform)category.transform, 36f, 44f, cardWidth - 48f);
-
-            TMP_Text name = RuntimeUI.CreateText(
-                "Name", rect, info?.DisplayName ?? relic.ToString(),
-                52f, Color.white, TextAlignmentOptions.Center);
-            PlaceFromTop((RectTransform)name.transform, 88f, 76f, cardWidth - 48f);
-
-            TMP_Text description = RuntimeUI.CreateText(
-                "Description", rect, info?.Description ?? "",
-                30f, new Color(0.88f, 0.9f, 0.95f, 1f), TextAlignmentOptions.Top);
-            PlaceFromTop((RectTransform)description.transform, 190f, cardHeight - 250f, cardWidth - 64f);
+            card.GetComponent<Button>().onClick.AddListener(() => picked = captured);
         }
-    }
-
-    /// 부모의 위쪽 가장자리에서 offsetFromTop 만큼 내려온 위치에 배치한다.
-    static void PlaceFromTop(RectTransform rect, float offsetFromTop, float height, float width)
-    {
-        rect.anchorMin = new Vector2(0.5f, 1f);
-        rect.anchorMax = new Vector2(0.5f, 1f);
-        rect.pivot = new Vector2(0.5f, 1f);
-        rect.sizeDelta = new Vector2(width, height);
-        rect.anchoredPosition = new Vector2(0f, -offsetFromTop);
     }
 
     void Teardown()
