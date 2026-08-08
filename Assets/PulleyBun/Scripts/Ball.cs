@@ -54,6 +54,7 @@ namespace PulleyBun
             var hitWall = Physics2D.Raycast(position, direction, move.magnitude, layerMaskWall);
             if (hitWall)
             {
+                Fx.Ring(position, 0.15f, 0.2f, new Color(0f, 0.45f, 1f, 0.5f), width: 0.13f, duration: 0.35f);
                 Destroy(gameObject);
                 return;
             }
