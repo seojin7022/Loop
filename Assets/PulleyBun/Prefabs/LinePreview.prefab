@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1033909223869908591}
   - component: {fileID: 3781932172494663646}
+  - component: {fileID: 7112183949863391279}
   m_Layer: 12
   m_Name: LinePreview
   m_TagString: Line
@@ -79,6 +80,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &7112183949863391279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861803222902976106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889b39683dc1bf345a9d7ae472c6212b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PulleyBun.LinePreview
+  spriteRenderer: {fileID: 5894855798982921440}
+  unavailableColor: {r: 0.6, g: 0.2, b: 0.2, a: 0.5}
 --- !u!1 &4450613006933839450
 GameObject:
   m_ObjectHideFlags: 0
