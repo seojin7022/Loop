@@ -4,8 +4,6 @@ using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] RoomGenerator generator;
-
     int currentRow = 0;
     int currentStage = 0;
     // 0 = 가운데
@@ -130,32 +128,6 @@ public class RoomManager : MonoBehaviour
         DrawAllRooms();
     }
 
-    Vector3 GetReferenceWorldPosition()
-    {
-        int minRow = int.MaxValue;
-
-        foreach (var room in rooms.Values)
-            minRow = Mathf.Min(minRow, room.GridPos.y);
-
-        Vector3Int origin = RoomOrigin(new Vector2Int(0, minRow));
-
-        return floorTilemap.CellToWorld(origin)
-            + new Vector3(roomWidth * 0.5f, 0f, 0f);
-    }
-
-    Vector3 GetRoomOffset(Room room)
-    {
-        int minRow = int.MaxValue;
-
-        foreach (var r in rooms.Values)
-            minRow = Mathf.Min(minRow, r.GridPos.y);
-
-        return new Vector3(
-            room.GridPos.x * roomWidth,
-            (room.GridPos.y - minRow) * roomHeight,
-            0f);
-    }
-
     void DrawAllRooms()
     {
         floorTilemap.ClearAllTiles();
@@ -204,13 +176,25 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        if(!hasDown)
+        if (!hasDown)
         {
-            for(int x=0;x<roomWidth;x++)
+            for (int x = 0; x < roomWidth; x++)
             {
                 wallTilemap.SetTile(
-                    origin + new Vector3Int(x,0,0),
+                    origin + new Vector3Int(x, 0, 0),
                     wallTile);
+            }
+
+            // 현재 존재하는 방 중 가장 아래 중앙 방
+            // 아래쪽 벽의 중앙 타일 제거
+            if (room.GridPos.x == 0 && room.GridPos.y == bottomRow)
+            {
+                int centerX = roomWidth / 2;
+
+                wallTilemap.SetTile(origin + new Vector3Int(centerX, 0, 0), null);
+
+                if(roomWidth % 2 == 0)
+                    wallTilemap.SetTile(origin + new Vector3Int(centerX - 1, 0, 0), null);
             }
         }
 

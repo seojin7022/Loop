@@ -13,13 +13,13 @@ TagManager:
   - 
   - Water
   - UI
+  - Wall
+  - BallWall
   - 
   - 
-  - 
-  - 
-  - LinePreview
-  - Line
   - Ball
+  - Line
+  - LinePreview
   - 
   - 
   - 

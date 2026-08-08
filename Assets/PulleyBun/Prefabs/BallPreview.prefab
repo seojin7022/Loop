@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 535825994937226021}
   - component: {fileID: 8100646485220681019}
   - component: {fileID: 5808097696754945368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BallPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ LineRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}

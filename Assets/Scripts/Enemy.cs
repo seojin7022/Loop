@@ -5,15 +5,16 @@ using Cysharp.Threading.Tasks;
 public class Enemy : MonoBehaviour
 {
     Vector3 spawn, target;
-    float speed;
+    float speed, hp;
+    bool isDestroyed;
 
-    public void SetEnemy(Vector3 spawnPos, Vector3 targetPos, float speed)
+    public void SetEnemy(Vector3 spawnPos, Vector3 targetPos, float speed, float hp)
     {
         spawn = spawnPos;
         target = targetPos;
         this.speed = speed;
-        Debug.Log(target);
-        Debug.Log(speed);
+        this.hp = hp;
+        
         MoveToTarget().Forget();
     }
 
@@ -27,6 +28,23 @@ public class Enemy : MonoBehaviour
         float yTime = Mathf.Abs(target.y - spawn.y) / speed;
         await transform.DOMoveY(target.y, yTime).SetEase(Ease.Linear).WithCancellation(token);
 
+        if(isDestroyed) return;
+        
+        EventBus.Publish("PlayerDamage");
         Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.TryGetComponent(out PulleyBun.Ball ball))
+        {
+            hp -= 1;
+            if(hp <= 0)
+            {
+                EventBus.Publish("EnemyDie");
+                isDestroyed = true;
+                Destroy(gameObject);
+            }
+        }
     }
 }
