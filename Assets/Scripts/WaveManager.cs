@@ -12,8 +12,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     int hp;
 
-    public int wavePerStage;
-    public int maxExpansionStage;
+    public int wavePeriod;
 
     [Header("페이즈")]
     [Tooltip("스테이지 시작 전 특성 3택 1 선택 화면을 띄운다.")]
@@ -38,7 +37,7 @@ public class WaveManager : MonoBehaviour
     public bool IsWaveRunning => waveRunning;
     public int CurrentStage => StageTable.StageOfWave(currrentWave, SafePeriod);
 
-    int SafePeriod => Mathf.Max(1, wavePerStage);
+    int SafePeriod => Mathf.Max(1, wavePeriod);
 
     public void Awake()
     {
@@ -119,7 +118,7 @@ public class WaveManager : MonoBehaviour
 
         if (wavePreviewEnabled && lanes.Count > 0)
         {
-            WavePreview preview = WavePreview.Ensure();
+            var preview = WavePreview.Instance;
             if (preview != null) await preview.ShowAndWaitAsync(currrentWave, expected, lanes);
         }
 
@@ -135,7 +134,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = true;
         nowEnemyNum = spawner.SpawnWave(currrentWave, SafePeriod);
 
-        if(nowEnemyNum <= 0)
+        if (nowEnemyNum <= 0)
         {
             // 진입 라인이 없거나 처치 목표가 0이면 더 진행할 수 없다. 무한 루프를 막고 알린다.
             waveRunning = false;
