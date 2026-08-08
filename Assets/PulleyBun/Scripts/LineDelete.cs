@@ -38,6 +38,8 @@ namespace PulleyBun
             Fx.HitBurst(center, highlightColor, 8,
                 speed: 4f, size: 0.12f, lifetime: 0.28f);
 
+            Tutorial.Trigger("RemoveMirror");
+
             Destroy(gameObject);
         }
 

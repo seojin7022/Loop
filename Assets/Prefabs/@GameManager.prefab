@@ -46,3 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   waveManager: {fileID: 0}
   spawner: {fileID: 0}
+  playback:
+    m_Name: Playback
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3725fbbb-6410-4aa1-9297-2e1ddb64d7ec
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  holdThrehold: 0
+  playbackSpeed: 0

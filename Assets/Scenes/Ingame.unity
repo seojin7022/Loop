@@ -758,6 +758,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.data[0].completeOn
+      value: PlaceMirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.data[1].completeOn
+      value: RemoveMirror
+      objectReference: {fileID: 0}
     - target: {fileID: 4641350358260643292, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
       propertyPath: m_Name
       value: TutorialUI
