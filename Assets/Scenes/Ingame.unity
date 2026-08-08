@@ -745,6 +745,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &657969392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9155888776372681576, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+  m_PrefabInstance: {fileID: 1811268719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &708727228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1154,7 +1159,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
   m_PrefabInstance: {fileID: 1811268719}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 657969392}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61da72fe237031b48b4f002bf3693f20, type: 3}
@@ -1165,12 +1170,53 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
   m_PrefabInstance: {fileID: 1811268719}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 657969392}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccbc03777f3d2024fa85e25209d5be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+--- !u!114 &1122469383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657969392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c04360a7aa63b740a6d0091efa4e315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageScreenEffect
+  lowHealthThreshold: 0.5
+  hitIntensity: 0.4
+  lowHealthMaxIntensity: 0.3
+  effectWidth: 0.15
+  fadeOutTime: 0.3
+  lowHealthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1180967790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1631,6 +1677,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 554668936}
     - target: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: damageEffect
+      value: 
+      objectReference: {fileID: 1122469383}
+    - target: {fileID: 8965907568366096176, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: wavePreviewEnabled
       value: 1
       objectReference: {fileID: 0}
@@ -1641,7 +1691,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9155888776372681576, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1122469383}
   m_SourcePrefab: {fileID: 100100000, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
 --- !u!1001 &1857606711
 PrefabInstance:
