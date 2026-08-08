@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     int hp;
 
     public int wavePeriod;
+    public int maxExpansionStage;
 
     [Header("페이즈")]
     [Tooltip("스테이지 시작 전 특성 3택 1 선택 화면을 띄운다.")]
