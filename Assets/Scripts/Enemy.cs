@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("처치 시 터지는 링의 최종 반지름")]
     [SerializeField] float deathRingRadius = 0.9f;
 
+    [SerializeField] Transform hpBar;
+
     Vector3 spawn, target;
     float speed, hp, maxHp;
     EnemyHealthBar healthBar;
@@ -86,6 +88,7 @@ public class Enemy : MonoBehaviour
         if (hp > 0f)
         {
             PlayHitFeedback(hitPoint);
+            hpBar.localScale = new Vector3(hp / maxHp, 1, 1);
             return;
         }
 
