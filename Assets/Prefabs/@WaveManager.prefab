@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   roomManager: {fileID: 0}
   spawner: {fileID: 7834353800441804814}
+  damageEffect: {fileID: 0}
   hp: 10
   wavePeriod: 1
   maxExpansionStage: 6
@@ -143,3 +144,5 @@ MonoBehaviour:
   allowSkip: 1
   keepDuringWave: 1
   dimmedAlpha: 0.22
+  heartSprite: {fileID: 0}
+  canvas_pref: {fileID: 8418510422263108412, guid: d24562e28823b4eb9ac9630476e5c473, type: 3}

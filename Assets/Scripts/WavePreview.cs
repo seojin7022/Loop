@@ -40,6 +40,7 @@ public class WavePreview : MonoBehaviour
     [SerializeField] Sprite heartSprite;
 
     readonly List<GameObject> markers = new();
+    public Canvas canvas_pref;
     Canvas canvas;
     TMP_Text prompt;
     bool startRequested;
@@ -162,20 +163,10 @@ public class WavePreview : MonoBehaviour
 
     void ShowPrompt(int wave, int enemyCount)
     {
-        canvas = RuntimeUI.CreateCanvas("WavePreviewCanvas", 400);
-
-        prompt = RuntimeUI.CreateText(
-            "Prompt", canvas.transform, "",
-            44f, Color.black, TextAlignmentOptions.Center);
+        canvas = Instantiate(canvas_pref);
+        prompt = canvas.GetComponentInChildren<TextMeshProUGUI>();
 
         UpdatePrompt(wave, enemyCount, leadInSeconds);
-
-        var rect = (RectTransform)prompt.transform;
-        rect.anchorMin = new Vector2(0.5f, 0f);
-        rect.anchorMax = new Vector2(0.5f, 0f);
-        rect.pivot = new Vector2(0.5f, 0f);
-        rect.anchoredPosition = new Vector2(0f, 70f);
-        rect.sizeDelta = new Vector2(1200f, 160f);
     }
 
     void UpdatePrompt(int wave, int enemyCount, float remaining)
