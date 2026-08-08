@@ -45,7 +45,7 @@ public class GameHud : MonoBehaviour
 
         label = RuntimeUI.CreateText(
             "Hud", canvas.transform, "",
-            30f, Color.white, TextAlignmentOptions.TopLeft);
+            30f, Color.black, TextAlignmentOptions.TopLeft);
 
         var rect = (RectTransform)label.transform;
         rect.anchorMin = new Vector2(0f, 1f);

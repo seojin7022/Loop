@@ -50,6 +50,7 @@ MonoBehaviour:
   spawner: {fileID: 7834353800441804814}
   hp: 10
   wavePeriod: 1
+  maxExpansionStage: 6
   relicSelectionEnabled: 1
   wavePreviewEnabled: 1
 --- !u!114 &7834353800441804814
