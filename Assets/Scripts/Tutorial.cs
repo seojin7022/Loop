@@ -1,8 +1,9 @@
 using System;
+using Cysharp.Threading.Tasks;
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
@@ -13,58 +14,52 @@ public class Tutorial : MonoBehaviour
 
         [Tooltip("비워두면 아무 키/클릭으로 넘어감. 값이 있으면 Tutorial.Trigger(\"값\") 호출 시에만 넘어감")]
         public string completeOn;
+        public string signal;
     }
 
     [SerializeField] Step[] steps;
-
-    [Header("Canvas")]
-
     [SerializeField] GameObject panel;
-
-    [Header("Panel")]
     [SerializeField] TMP_Text dialogueLabel;
+    [SerializeField] TutorialWave tutorialWave;
 
     static Tutorial instance;
-    int index = -1;
 
     public static bool IsRunning => instance != null && instance.enabled;
 
     void Awake() => instance = this;
     void OnDestroy() { if (instance == this) instance = null; }
 
-    void Start() => Next();
-
-    void Update()
+    public async UniTask PlayTutorial()
     {
-        if (!string.IsNullOrEmpty(steps[index].completeOn)) return;
+        Debug.Log("Tutorial");
+        tutorialWave.StartTutorial();
 
-        if ((Keyboard.current != null && Keyboard.current.anyKey.wasReleasedThisFrame) ||
-             Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
-            Next();
+        foreach(Step step in steps)
+        {
+            if (dialogueLabel) dialogueLabel.text = step.dialogue;
+
+            if(!string.IsNullOrEmpty(step.signal))
+                EventBus.Publish(step.signal);
+
+            if(string.IsNullOrEmpty(step.completeOn))
+                await UniTask.WaitUntil(() => (Keyboard.current != null && Keyboard.current.anyKey.wasReleasedThisFrame) ||
+                                               Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame);
+            else
+                await trigger.Where(x => x == step.completeOn).FirstAsync().AsUniTask();
+        }
+        
+        tutorialWave.FinishTutorial();
+
+        Show(false);
+        enabled = false;
+        return;
     }
 
-    /// 게임 코드에서 호출: Tutorial.Trigger("move"), Tutorial.Trigger("wave_cleared") 등
+    static Subject<string> trigger = new();
+
     public static void Trigger(string id)
     {
-        if (instance != null && instance.enabled && instance.steps[instance.index].completeOn == id)
-            instance.Next();
-    }
-
-    void Next()
-    {
-        index++;
-
-        if (index >= steps.Length)
-        {
-            Show(false);
-            enabled = false;
-            return;
-        }
-
-        Show(true);
-
-        Step step = steps[index];
-        if (dialogueLabel) dialogueLabel.text = step.dialogue;
+        trigger.OnNext(id);
     }
 
     void Show(bool on)

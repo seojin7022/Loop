@@ -58,11 +58,6 @@ public class WaveManager : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
-    void Start()
-    {
-        RunWaveAsync().Forget();
-    }
-
     public void EnemyDie()
     {
         if (isGameOver || !waveRunning) return;
@@ -91,7 +86,7 @@ public class WaveManager : MonoBehaviour
     }
 
     /// 특성 선택 → 동선 사전 표시 → 웨이브 시작 순서로 진행한다.
-    async UniTaskVoid RunWaveAsync()
+    public async UniTaskVoid RunWaveAsync()
     {
         if (isGameOver || spawner == null) return;
 
@@ -145,7 +140,6 @@ public class WaveManager : MonoBehaviour
         }
 
         Sfx.WaveStart();
-        Tutorial.Trigger("wave_started");
     }
 
     public void FinishWave()
@@ -156,7 +150,6 @@ public class WaveManager : MonoBehaviour
         nowEnemyNum = 0;
 
         Sfx.WaveClear();
-        Tutorial.Trigger("wave_cleared");
 
         if (LineMaker.Instance != null)
             LineMaker.Instance.DestroyAllLines();

@@ -14,7 +14,6 @@ public struct SpawnLane
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameManager gameManager;
     public RoomManager roomManager;
     public GameObject enemyPrefab;
 
@@ -41,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     public bool UseStageTable => useStageTable;
 
     /// 현재 남아 있는 모든 방의 진입 라인 목록. 사전 동선 표시와 스폰이 같은 데이터를 쓴다.
-public List<SpawnLane> BuildLanes(int wave = 0, int wavePeriod = 1)
+    public List<SpawnLane> BuildLanes(int wave = 0, int wavePeriod = 1)
     {
         var lanes = new List<SpawnLane>();
         if (roomManager == null) return lanes;
