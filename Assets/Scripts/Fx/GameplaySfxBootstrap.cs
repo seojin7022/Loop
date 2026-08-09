@@ -10,7 +10,7 @@ public sealed class GameplaySfxBootstrap : MonoBehaviour
     {
         SfxBank bank = GetComponent<SfxBank>();
         bank.SetEntry(Sfx.Id.RoomAdded, CreateRoomExpandClip(), 0.48f, 0.25f);
-        bank.SetEntry(Sfx.Id.EnemyDie, CreateEnemyDefeatClip(), 0.38f, 0.035f);
+        bank.SetEntry(Sfx.Id.EnemyHit, CreateEnemyDefeatClip(), 0.38f, 0.035f);
     }
 
     AudioClip CreateRoomExpandClip()
