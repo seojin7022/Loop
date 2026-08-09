@@ -70,7 +70,7 @@ public List<SpawnLane> BuildLanes(int wave = 0, int wavePeriod = 1)
     // 스테이지마다 적의 진입 방향과 목적지를 바꿔 같은 거울 배치가 반복되지 않게 한다.
     void ApplyStageLanePattern(List<SpawnLane> lanes, int stage)
     {
-        if (lanes.Count == 0 || roomManager == null || stage <= 1) return;
+        if (lanes.Count == 0 || roomManager == null) return;
 
         Bounds bounds = roomManager.RoomsBounds();
         float left = bounds.min.x + 1.5f;
@@ -80,9 +80,13 @@ public List<SpawnLane> BuildLanes(int wave = 0, int wavePeriod = 1)
         float centerX = bounds.center.x;
         float centerY = bounds.center.y;
 
-        switch ((stage - 1) % 4)
+        if(stage >= 4)
+            lanes.RemoveRange(0, 2);
+
+        switch(stage)
         {
-            case 1: // 좌우 반전
+            case 2:
+            case 4: // 좌우 반전
                 for (int i = 0; i < lanes.Count; i++)
                 {
                     SpawnLane lane = lanes[i];
@@ -92,24 +96,21 @@ public List<SpawnLane> BuildLanes(int wave = 0, int wavePeriod = 1)
                 }
                 break;
 
-            case 2: // 대각선 교차 진입
+            case 6: // 도착 지점만 좌우반전
                 for (int i = 0; i < lanes.Count; i++)
                 {
-                    bool fromUpperLeft = i % 2 == 0;
                     SpawnLane lane = lanes[i];
-                    lane.SpawnWorld = new Vector3(fromUpperLeft ? left : right, fromUpperLeft ? top : bottom, 0f);
-                    lane.TargetWorld = new Vector3(fromUpperLeft ? right : left, centerY, 0f);
+                    lane.TargetWorld.x = 2f * centerX - lane.TargetWorld.x;
                     lanes[i] = lane;
                 }
                 break;
 
-            case 3: // 협공: 위·아래에서 중앙을 향해 진입
+            case 3: // 상하반전
                 for (int i = 0; i < lanes.Count; i++)
                 {
-                    bool fromLeft = i % 2 == 0;
                     SpawnLane lane = lanes[i];
-                    lane.SpawnWorld = new Vector3(fromLeft ? left : right, fromLeft ? bottom : top, 0f);
-                    lane.TargetWorld = new Vector3(centerX, fromLeft ? top : bottom, 0f);
+                    lane.SpawnWorld.y = 2f * centerY - lane.SpawnWorld.y;
+                    lane.TargetWorld.y = 2f * centerY - lane.TargetWorld.y;
                     lanes[i] = lane;
                 }
                 break;
