@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 1122469379}
     - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
       propertyPath: holdThrehold
-      value: 0.9
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7732982400562199262, guid: 28c4329f5e4f947cc9d415a2c478aff0, type: 3}
       propertyPath: playbackSpeed
@@ -759,12 +759,30 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.data[3].dialogue
+      value: "\uC2A4\uD398\uC774\uC2A4 \uBC14\uB97C \uAFB9 \uB204\uB974\uBA74 \uBC30\uC18D\uC744
+        \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.data[4].dialogue
+      value: "\uAC70\uC6B8\uC744 \uC798 \uBC30\uCE58\uD574 \uBAB0\uB824\uC624\uB294
+        \uC801\uC744 \uB9C9\uC73C\uC138\uC694!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
       propertyPath: steps.Array.data[0].completeOn
       value: PlaceMirror
       objectReference: {fileID: 0}
     - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
       propertyPath: steps.Array.data[1].completeOn
       value: RemoveMirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 299847355562386354, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
+      propertyPath: steps.Array.data[3].completeOn
+      value: Playback
       objectReference: {fileID: 0}
     - target: {fileID: 4641350358260643292, guid: 2b3df5951c5c0425698061649c3b0faf, type: 3}
       propertyPath: m_Name

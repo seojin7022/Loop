@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public InputAction playback;
     public float holdThrehold, playbackSpeed;
 
+    bool didPlayback;
     float holdTime;
 
     void Awake()
@@ -31,7 +32,10 @@ public class GameManager : MonoBehaviour
             holdTime = 0;
         
         if(holdTime > holdThrehold)
+        {
+            Tutorial.Trigger("Playback");
             Time.timeScale = playbackSpeed;
+        }
         else
             Time.timeScale = 1.0f;
     }
