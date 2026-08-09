@@ -13,6 +13,7 @@ public class GameHud : MonoBehaviour
 
     Canvas canvas;
     TMP_Text label;
+    TMP_Text label2;
     readonly StringBuilder builder = new();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -46,12 +47,22 @@ public class GameHud : MonoBehaviour
         label = RuntimeUI.CreateText(
             "Hud", canvas.transform, "",
             30f, Color.black, TextAlignmentOptions.TopLeft);
+        label2 = RuntimeUI.CreateText(
+            "Hud2", canvas.transform, "",
+            30f, Color.black, TextAlignmentOptions.TopRight);
 
         var rect = (RectTransform)label.transform;
         rect.anchorMin = new Vector2(0f, 1f);
         rect.anchorMax = new Vector2(0f, 1f);
         rect.pivot = new Vector2(0f, 1f);
         rect.anchoredPosition = new Vector2(36f, -30f);
+        rect.sizeDelta = new Vector2(720f, 260f);
+
+        rect = (RectTransform)label2.transform;
+        rect.anchorMin = new Vector2(1f, 1f);
+        rect.anchorMax = new Vector2(1f, 1f);
+        rect.pivot = new Vector2(1f, 1f);
+        rect.anchoredPosition = new Vector2(-36f, -30f);
         rect.sizeDelta = new Vector2(720f, 260f);
     }
 
@@ -67,11 +78,9 @@ public class GameHud : MonoBehaviour
         if (label == null || wave == null) return;
 
         builder.Clear();
-        builder.Append("HP ").Append(Mathf.Max(0, wave.Hp)).Append(" / ").Append(wave.MaxHp)
-            .Append("   거울 ").Append(Mathf.Max(0, LineMaker.Instance.LineCount)).Append(" / ").Append(LineMaker.Instance.MaxLines)
-            .Append("   스테이지 ").Append(WaveManager.Instance.CurrentStage);
+        builder.Append("<b><color=#af0000>HP ").Append(Mathf.Max(0, wave.Hp)).Append(" / ").Append(wave.MaxHp).Append("</color></b>");
 
-        RelicManager relics = RelicManager.Instance;
+        /*RelicManager relics = RelicManager.Instance;
         if (relics != null && relics.Relics.Count > 0)
         {
             builder.Append("\n특성: ");
@@ -80,8 +89,14 @@ public class GameHud : MonoBehaviour
                 if (i > 0) builder.Append(", ");
                 builder.Append(RelicDatabase.NameOf(relics.Relics[i]));
             }
-        }
+        }*/
 
         label.text = builder.ToString();
+
+        
+        builder.Clear();
+        builder.Append("<b><color=#00971f>거울 ").Append(Mathf.Max(0, LineMaker.Instance.LineCount)).Append(" / ").Append(LineMaker.Instance.MaxLines).Append("</color>")
+            .Append("\n스테이지 ").Append(WaveManager.Instance.CurrentStage).Append("</b>");
+        label2.text = builder.ToString();
     }
 }
