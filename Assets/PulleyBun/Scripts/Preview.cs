@@ -38,6 +38,7 @@ namespace PulleyBun
         [SerializeField] float branchAlpha = 0.7f;
 
         int layerMask;
+        int layerMaskWall;
 
         LineRenderer branchLeft, branchRight;
 
@@ -48,6 +49,7 @@ namespace PulleyBun
         void Awake()
         {
             layerMask = LayerMask.GetMask("Line") | LayerMask.GetMask("LinePreview");
+            layerMaskWall = LayerMask.GetMask("Wall");
 
             if (lineRenderer == null) lineRenderer = GetComponent<LineRenderer>();
 
@@ -155,10 +157,22 @@ namespace PulleyBun
             for (int i = 0; i < maxBounces; i++)
             {
                 RaycastHit2D hit = Physics2D.Raycast(position, direction, predictLength, layerMask);
+                RaycastHit2D hitWall = Physics2D.Raycast(position, direction, predictLength, layerMaskWall);
 
                 if (!hit)
                 {
+                    if (hitWall)
+                    {
+                        points.Add(hitWall.point);
+                        return bounced;
+                    }
                     points.Add(position + direction * predictLength);
+                    return bounced;
+                }
+
+                if (hitWall && hit.distance > hitWall.distance)
+                {
+                    points.Add(hitWall.point);
                     return bounced;
                 }
 
