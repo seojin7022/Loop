@@ -185,9 +185,9 @@ public class WavePreview : MonoBehaviour
     {
         if (prompt == null) return;
 
-        string hint = "<size=70%><color=#2a4366>Space 를 눌러 시작</color></size>";
+        string hint = "<size=140%>거울 재배치 후 Space로 시작</size>";
 
-        prompt.text = $"웨이브 {wave + 1} · 적 {enemyCount}마리\n{hint}";
+        prompt.text = $"웨이브 {wave + 1} · 적 {enemyCount}마리\n\n{hint}";
     }
 
     void HidePrompt()

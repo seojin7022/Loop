@@ -33,12 +33,13 @@ public class GameManager : MonoBehaviour
         
         if(holdTime > holdThrehold)
         {
-            if(!didPlayback)
-                Tutorial.Trigger("Playback");
             didPlayback = true;
             Time.timeScale = playbackSpeed;
         }
         else
             Time.timeScale = 1.0f;
+        
+        if(playback.WasReleasedThisFrame() && didPlayback)
+            Tutorial.Trigger("Playback");
     }
 }
