@@ -61,8 +61,5 @@ public class TutorialWave : MonoBehaviour
 
         // 튜토리얼 종료 처리
         Tutorial.Trigger("tutorial_finished");
-
-        // 이후 일반 웨이브 시작
-        WaveManager.Instance.RunWaveAsync().Forget();
     }
 }
