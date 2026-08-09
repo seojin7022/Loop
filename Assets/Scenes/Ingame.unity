@@ -1399,7 +1399,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62a0a80c1a644f95a98d85aff4e295b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SfxBank
-  entries: []
+  entries:
+  - id: EnemyDie
+    clips:
+    - {fileID: 8300000, guid: dada8abd3cd244dc59bfc8f07dd1aa2a, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.8, y: 1.2}
+    minInterval: 0.03
   masterVolume: 1
   source: {fileID: 0}
 --- !u!82 &1735743305
