@@ -86,6 +86,14 @@ namespace PulleyBun
             return LineCount < MaxLines;
         }
 
+        public void DestroyAllLines()
+        {
+            foreach (var line in lines)
+            {
+                Destroy(line);
+            }
+        }
+
         void OnClick(Vector2 position)
         {
             if (isDragging) return;

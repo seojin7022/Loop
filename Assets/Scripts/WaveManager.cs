@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using PulleyBun;
 using R3;
 using UnityEngine;
 
@@ -156,6 +157,9 @@ public class WaveManager : MonoBehaviour
 
         Sfx.WaveClear();
         Tutorial.Trigger("wave_cleared");
+
+        if (LineMaker.Instance != null)
+            LineMaker.Instance.DestroyAllLines();
 
         currrentWave++;
 
