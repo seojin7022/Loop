@@ -1146,6 +1146,54 @@ PrefabInstance:
       propertyPath: bumperListRight.Array.data[2].bumperPosition.y
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[0].spawnPoints.Array.data[1].spawnPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.data[0].spawnPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.data[1].spawnPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.data[1].spawnPosition.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[0].spawnPoints.Array.data[1].targetPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[1].spawnPoints.Array.data[0].targetPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[2].spawnPoints.Array.data[0].targetPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.data[0].targetPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[3].spawnPoints.Array.data[1].targetPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[4].spawnPoints.Array.data[0].targetPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595033809643968575, guid: 1c5556b8a1361477b8fd1a927586fdd8, type: 3}
+      propertyPath: roomTypeDatas.Array.data[5].spawnPoints.Array.data[0].targetPosition.x
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1493,6 +1541,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
+      propertyPath: minimumEnemyGap
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: initialEnemySpeed
       value: 5
       objectReference: {fileID: 0}
@@ -1570,7 +1622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[0].killTarget
-      value: 8
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[1].enemySpeed
@@ -1578,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[1].killTarget
-      value: 12
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[2].enemySpeed
@@ -1586,11 +1638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[2].killTarget
-      value: 16
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[3].killTarget
-      value: 22
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[4].enemySpeed
@@ -1598,7 +1650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[4].killTarget
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[5].enemySpeed
@@ -1606,7 +1658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[5].killTarget
-      value: 38
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 7834353800441804814, guid: 31b8e9d85871f4c899da9e419e69099b, type: 3}
       propertyPath: stageTable.stages.Array.data[0].spawnInterval
