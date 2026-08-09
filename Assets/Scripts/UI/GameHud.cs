@@ -67,7 +67,8 @@ public class GameHud : MonoBehaviour
         if (label == null || wave == null) return;
 
         builder.Clear();
-        builder.Append("HP ").Append(Mathf.Max(0, wave.Hp)).Append(" / ").Append(wave.MaxHp);
+        builder.Append("HP ").Append(Mathf.Max(0, wave.Hp)).Append(" / ").Append(wave.MaxHp)
+            .Append("   거울 ").Append(Mathf.Max(0, LineMaker.Instance.LineCount)).Append(" / ").Append(LineMaker.Instance.MaxLines);
 
         RelicManager relics = RelicManager.Instance;
         if (relics != null && relics.Relics.Count > 0)
