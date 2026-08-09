@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 using TMPro;
@@ -34,26 +35,45 @@ public class Tutorial : MonoBehaviour
         Debug.Log("Tutorial");
         tutorialWave.StartTutorial();
 
-        foreach(Step step in steps)
+        skipCts = new CancellationTokenSource();
+
+        try
         {
-            if (dialogueLabel) dialogueLabel.text = step.dialogue;
+            foreach(Step step in steps)
+            {
+                if (dialogueLabel) dialogueLabel.text = step.dialogue;
 
-            if(!string.IsNullOrEmpty(step.signal))
-                EventBus.Publish(step.signal);
+                if(!string.IsNullOrEmpty(step.signal))
+                    EventBus.Publish(step.signal);
 
-            if(string.IsNullOrEmpty(step.completeOn))
-                await UniTask.WaitUntil(() => (Keyboard.current != null && Keyboard.current.anyKey.wasReleasedThisFrame) ||
-                                               Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame);
-            else
-                await trigger.Where(x => x == step.completeOn).FirstAsync().AsUniTask();
+                if(string.IsNullOrEmpty(step.completeOn))
+                    await UniTask.WaitUntil(() => (Keyboard.current != null && Keyboard.current.anyKey.wasReleasedThisFrame) ||
+                                                   Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame,
+                                            cancellationToken: skipCts.Token);
+                else
+                {
+                    bool done = false;
+                    using IDisposable sub = trigger.Where(x => x == step.completeOn).Subscribe(_ => done = true);
+                    await UniTask.WaitUntil(() => done, cancellationToken: skipCts.Token);
+                }
+            }
         }
-        
+        catch (OperationCanceledException) { }  // Skip 버튼
+
+        skipCts.Dispose();
+        skipCts = null;
+
         tutorialWave.FinishTutorial();
 
         Show(false);
         enabled = false;
         return;
     }
+
+    CancellationTokenSource skipCts;
+
+    /// <summary>Skip 버튼 OnClick 에 연결한다. 튜토리얼을 통째로 끝낸다.</summary>
+    public void SkipTutorial() => skipCts?.Cancel();
 
     static Subject<string> trigger = new();
 
