@@ -76,10 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -120,17 +120,22 @@ MonoBehaviour:
   - dialogue: "\uB9C8\uC6B0\uC2A4\uB97C \uB4DC\uB798\uADF8 \uD558\uACE0 \uAC70\uC6B8\uC744
       \uC124\uCE58\uD574\uBCF4\uC138\uC694!"
     completeOn: 
+    signal: 
   - dialogue: "\uB9C8\uC6B0\uC2A4 \uC6B0\uD074\uB9AD\uC744 \uD1B5\uD574 \uAC70\uC6B8\uC744
       \uC0AD\uC81C\uD574\uBCF4\uC138\uC694!"
     completeOn: 
+    signal: 
   - dialogue: "\uACBD\uB85C\uB97C \uB530\uB77C \uC6C0\uC9C1\uC774\uB294 \uC801\uC744
       \uACF5\uC744 \uC774\uC6A9\uD574 \uACF5\uACA9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4!"
     completeOn: 
+    signal: 
   - dialogue: "\uAC70\uC6B8\uC744 \uC798 \uBC30\uCE58\uD574 \uBAB0\uB824\uC624\uB294
       \uC801\uC744 \uB9C9\uC73C\uC138\uC694!"
     completeOn: 
+    signal: 
   panel: {fileID: 8432729945869954074}
   dialogueLabel: {fileID: 9051170426704030385}
+  tutorialWave: {fileID: 0}
 --- !u!1 &5166345243996555566
 GameObject:
   m_ObjectHideFlags: 0
