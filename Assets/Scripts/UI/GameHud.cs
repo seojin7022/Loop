@@ -68,7 +68,8 @@ public class GameHud : MonoBehaviour
 
         builder.Clear();
         builder.Append("HP ").Append(Mathf.Max(0, wave.Hp)).Append(" / ").Append(wave.MaxHp)
-            .Append("   거울 ").Append(Mathf.Max(0, LineMaker.Instance.LineCount)).Append(" / ").Append(LineMaker.Instance.MaxLines);
+            .Append("   거울 ").Append(Mathf.Max(0, LineMaker.Instance.LineCount)).Append(" / ").Append(LineMaker.Instance.MaxLines)
+            .Append("   스테이지 ").Append(WaveManager.Instance.CurrentStage+1);
 
         RelicManager relics = RelicManager.Instance;
         if (relics != null && relics.Relics.Count > 0)

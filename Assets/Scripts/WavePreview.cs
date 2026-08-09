@@ -46,6 +46,9 @@ public class WavePreview : MonoBehaviour
     TMP_Text prompt;
     bool startRequested;
 
+    float sizeOcilationAmplitude = 10f;
+    float sizeOcilationPeriod = 1f;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -185,9 +188,10 @@ public class WavePreview : MonoBehaviour
     {
         if (prompt == null) return;
 
-        string hint = "<size=140%>거울 재배치 후 Space로 시작</size>";
+        int size = 140 + (int)(sizeOcilationAmplitude * Mathf.Sin(Time.time / sizeOcilationPeriod * 2 * Mathf.PI));
+        string hint = $"<size={size}%>거울 재배치 후 Space로 시작</size>";
 
-        prompt.text = $"웨이브 {wave + 1} · 적 {enemyCount}마리\n\n{hint}";
+        prompt.text = $"{hint}";
     }
 
     void HidePrompt()
